@@ -30,7 +30,7 @@ A cozy, interactive pet café website showcasing a warm and welcoming online exp
 
 ### Option 1: View on GitHub Pages (Recommended)
 Click below to view the live demo:
-- 🔗 **[Visit Paws & Cups Live](https://jiyaanand2608.github.io/Paws-Cups/)**
+- 🔗 **[Visit Paws & Cups Live](https://github.com/JiyaAnand2608/Paws-Cups/blob/main/index2.html)**
 
 ### Option 2: View Individual Pages
 - [Home Page](https://github.com/JiyaAnand2608/Paws-Cups/blob/main/index2.html)
