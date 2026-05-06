@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visit Us — Paws & Cups</title>
+<link rel="stylesheet" href="style2.css?v=2">
+</head>
+<body>
+ 
+<!-- NAVBAR -->
+<header>
+  <nav class="navbar">
+    <div class="logo-area">
+      <img src="images/logo.png" class="logo" alt="Paws & Cups Logo">
+      <span class="cafe-name">Paws <span class="and-sign">&</span> Cups</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index2.html">Home</a></li>
+      <li><a href="about2.html">About</a></li>
+      <li><a href="menu2.html">Menu</a></li>
+      <li><a href="contact2.html" class="active-link">Visit Us</a></li>
+    </ul>
+    <div class="menu-icon">☰</div>
+    <div class="cart-box">
+      🛒 <span id="cart-count">0</span> | <span id="cart-total">₹0</span>
+    </div>
+  </nav>
+</header>
+ 
+<!-- MODE STRIP -->
+<div class="mode-strip">
+  <span class="mode-label on" id="lbl-human">Human Mode</span>
+  <button class="toggle-pill" id="modeToggle" aria-label="Switch mode">
+    <span class="toggle-knob"></span>
+  </button>
+  <span class="mode-label" id="lbl-pet">Pet Mode</span>
+</div>
+ 
+<!-- PAGE -->
+<main class="contact-page">
+ 
+  <!-- Hero -->
+  <div class="contact-hero">
+    <span class="section-tag" id="eyebrow-text">Visit Us</span>
+    <h2 id="hero-heading">Come Say Hello</h2>
+    <p id="hero-sub">We'd love to meet you and your furry companion — reservations welcome.</p>
+  </div>
+ 
+  <div class="contact-grid">
+ 
+    <!-- Reservation Card -->
+    <div class="contact-card booking-card">
+      <p class="contact-card-title">Reserve a Table</p>
+ 
+      <div class="contact-grid2">
+        <div class="field">
+          <label>Your Name</label>
+          <input type="text" id="res-name" placeholder="e.g. Avni">
+        </div>
+        <div class="field">
+          <label>Date &amp; Time</label>
+          <input type="datetime-local" id="res-datetime">
+        </div>
+      </div>
+ 
+      <div class="contact-grid2">
+        <div class="field">
+          <label>Pet's Name</label>
+          <input type="text" id="pet-name" placeholder="e.g. Bruno">
+        </div>
+        <div class="field">
+          <label>Breed</label>
+          <input type="text" id="pet-breed" placeholder="e.g. Golden Retriever">
+        </div>
+      </div>
+ 
+      <div class="field">
+        <label>Seating Preference</label>
+        <div class="seat-row" id="seatRow">
+          <button class="seat-pill" data-seat="outdoor">Outdoor Patio</button>
+          <button class="seat-pill" data-seat="quiet">Quiet Corner</button>
+          <button class="seat-pill" data-seat="window">Window Seat</button>
+        </div>
+      </div>
+ 
+      <div class="bday-toggle" id="bdayToggle">
+        <div class="bday-left">
+          <span class="bday-icon">🎂</span>
+          <div>
+            <div class="bday-text">It's my pet's birthday!</div>
+            <div class="bday-sub">We'll make it extra special</div>
+          </div>
+        </div>
+        <div class="bday-check-box" id="bdayBox">✓</div>
+      </div>
+ 
+      <button class="pink-btn book-btn" id="bookBtn">
+        <span id="bookBtnText">Confirm Reservation</span>
+      </button>
+    </div>
+ 
+    <!-- Info Card -->
+    <div class="contact-card info-card">
+      <p class="contact-card-title" id="info-title">Find Us</p>
+ 
+      <div class="info-item">
+        <div class="info-icon">📍</div>
+        <div>
+          <div class="info-label">Location</div>
+          <div class="info-val">Paw Street, Banur</div>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">📞</div>
+        <div>
+          <div class="info-label">Phone</div>
+          <div class="info-val">+91 98*****210</div>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">✉️</div>
+        <div>
+          <div class="info-label">Email</div>
+          <div class="info-val">pawsandcups@woof.com</div>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">🕙</div>
+        <div>
+          <div class="info-label">Hours</div>
+          <div class="info-val hours-val" id="hoursVal">10:00 AM – 10:00 PM · Daily</div>
+          <div class="yappy">All day is Yappy Hour here 🐾</div>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- Map Card -->
+    <div class="contact-card map-card">
+      <p class="contact-card-title" id="map-title">Our Location</p>
+      <div class="map-wrap">
+        <div class="map-block" style="width:85px;height:50px;top:18px;left:55px;"></div>
+        <div class="map-block" style="width:60px;height:38px;top:18px;right:70px;"></div>
+        <div class="map-block" style="width:70px;height:45px;bottom:22px;left:72px;"></div>
+        <div class="map-block" style="width:80px;height:42px;bottom:22px;right:55px;"></div>
+        <div class="map-block" style="width:40px;height:30px;top:22px;left:175px;"></div>
+        <div class="map-pin-wrap">
+          <div class="map-bubble">
+            <span id="mapPinIcon">☕</span>
+            <span>Paws &amp; Cups · Banur</span>
+          </div>
+          <div class="map-bubble-tail"></div>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- Message Form -->
+    <div class="contact-card msg-card">
+      <p class="contact-card-title">Send Us a Message</p>
+      <div class="msg-grid">
+        <div class="field">
+          <label>Your Name</label>
+          <input type="text" id="name" placeholder="Your Name">
+        </div>
+        <div class="field">
+          <label>Your Email</label>
+          <input type="email" id="email" placeholder="Your Email">
+        </div>
+      </div>
+      <div class="field">
+        <label>Message</label>
+        <textarea id="message" placeholder="Ask us anything — about the menu, bringing your pet, or just to say hi."></textarea>
+      </div>
+      <button class="pink-btn send-btn" id="sendBtn">Send Message</button>
+      <p id="status"></p>
+    </div>
+ 
+  </div>
+</main>
+ 
+<!-- MODAL -->
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal-card">
+    <span class="modal-emoji" id="modalEmoji">🐾</span>
+    <h3 id="modalTitle">Table Reserved!</h3>
+    <p id="modalMsg">We're looking forward to welcoming you and your furry friend.</p>
+    <button class="modal-close pink-btn" onclick="closeModal()">Perfect, thank you</button>
+  </div>
+</div>
+ 
+<canvas id="confetti-canvas"></canvas>
+ 
+<!-- FOOTER -->
+<footer>
+  <div class="footer-middle">
+    <span class="cafe-name">Paws <span class="and-sign">&</span> Cups</span>
+    <p>© 2026 Paws &amp; Cups · Banur, Punjab</p>
+  </div>
+</footer>
+ 
+<script src="script.js"></script>
+</body>
+</html>
