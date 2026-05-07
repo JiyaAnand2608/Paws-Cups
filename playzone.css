@@ -13,20 +13,6 @@
   justify-content: center !important;
 }
 
-.game-container h2 {
-  font-family: var(--main-font);
-  font-size: clamp(2rem, 5vw, 3.2rem) !important;
-  margin-bottom: 20px !important;
-  color: #D68181 !important;
-  font-weight: 800 !important;
-}
-
-.game-container p {
-  color: #555 !important;
-  font-size: 1.1rem !important;
-  margin-bottom: 40px !important;
-}
-
 .cups-row {
   display: flex !important;
   justify-content: center !important;
@@ -50,9 +36,6 @@
   color: #3C2A21 !important;
 }
 
-.win-text { color: #D68181 !important; }
-.lose-text { color: #888 !important; }
-
 .win-animation {
   animation: bounce 1s ease infinite alternate !important;
 }
@@ -63,17 +46,3 @@
   60% {transform: translateY(-15px);}
 }
 
-.back-link {
-  display: inline-block !important;
-  margin-top: 20px !important;
-  color: #E89D9D !important;
-  text-decoration: none !important;
-  font-weight: 700 !important;
-  font-size: 0.95rem !important;
-  transition: all 0.3s !important;
-}
-
-.back-link:hover {
-  color: #D68181 !important;
-  letter-spacing: 0.5px !important;
-}
