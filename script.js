@@ -200,11 +200,11 @@ document.addEventListener("DOMContentLoaded", () => {
           }
 
           // Disable all cups
-          document.querySelectorAll('.cup').forEach(c => {
-            c.style.cursor = "default";
-            if (!c.classList.contains("win-animation") && c.textContent !== "❌") {
-              c.style.opacity = "0.5";
-            }
+          // document.querySelectorAll('.cup').forEach(c => {
+          //   c.style.cursor = "default";
+          //   if (!c.classList.contains("win-animation") && c.textContent !== "❌") {
+          //     c.style.opacity = "0.5";
+          //   }
           });
         };
         
