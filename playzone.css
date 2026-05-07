@@ -45,7 +45,8 @@
   40% {transform: translateY(-30px);}
   60% {transform: translateY(-15px);}
 } */
-*{
+
+ *{
   margin:0;
   padding:0;
   box-sizing:border-box;
@@ -62,26 +63,26 @@ body{
   position:relative;
 }
 
-/* Floating Paw Animation */
+/* Floating paws in background */
 
 body::before,
 body::after{
-  content:"🐾 🐾 🐾";
+  content:"🐾 🐾 🐾 🐾";
   position:absolute;
-  font-size:40px;
+  font-size:45px;
   opacity:0.12;
-  animation: floatPaws 10s linear infinite;
+  animation: floatPaws 12s linear infinite;
 }
 
 body::before{
-  top:10%;
-  left:-20%;
+  top:15%;
+  left:-30%;
 }
 
 body::after{
-  bottom:10%;
-  right:-20%;
-  animation-delay:5s;
+  bottom:15%;
+  right:-30%;
+  animation-delay:6s;
 }
 
 @keyframes floatPaws{
@@ -91,18 +92,24 @@ body::after{
   }
 
   to{
-    transform:translateX(140vw);
+    transform:translateX(160vw);
   }
 }
 
+/* Main container */
+
 .game-container{
-  background:#FFFBF5;
+  background:#fffaf5;
   width:85%;
   max-width:750px;
   padding:50px 40px;
   border-radius:35px;
   text-align:center;
+
+  border:4px dashed #ffb38a;
+
   box-shadow:0 20px 50px rgba(0,0,0,0.12);
+
   position:relative;
   z-index:2;
 }
@@ -115,53 +122,56 @@ h2{
 
 .subtitle{
   color:#6B4F4F;
-  font-size:1.1rem;
-  margin-bottom:30px;
+  font-size:1.2rem;
+  margin-bottom:35px;
 }
+
+/* Cups */
 
 .cups-row{
   display:flex;
   justify-content:center;
-  gap:35px;
-  margin:40px 0;
+  gap:40px;
+  margin:45px 0;
   flex-wrap:wrap;
 }
 
 .cup{
-  font-size: clamp(80px, 15vw, 110px);
+  font-size:120px;
+
   cursor:pointer;
-  transition: all 0.3s ease;
+
   user-select:none;
 
-  animation: wiggle 2s ease-in-out infinite;
+  transition: transform 0.3s ease;
+
+  animation: floatCup 2s ease-in-out infinite;
 }
+
+/* Hover effect */
 
 .cup:hover{
-  transform: translateY(-15px) scale(1.1) rotate(-5deg);
+  transform: scale(1.2) rotate(-10deg);
 }
 
-@keyframes wiggle{
+/* Floating cup animation */
+
+@keyframes floatCup{
 
   0%{
-    transform:rotate(0deg);
-  }
-
-  25%{
-    transform:rotate(2deg);
+    transform: translateY(0px);
   }
 
   50%{
-    transform:rotate(0deg);
-  }
-
-  75%{
-    transform:rotate(-2deg);
+    transform: translateY(-15px);
   }
 
   100%{
-    transform:rotate(0deg);
+    transform: translateY(0px);
   }
 }
+
+/* Message */
 
 .game-message{
   font-size:1.8rem;
@@ -186,6 +196,8 @@ h2{
   }
 }
 
+/* Win and lose text */
+
 .win-text{
   color:#2E8B57;
 }
@@ -194,25 +206,26 @@ h2{
   color:#D7263D;
 }
 
+/* Winning animation */
+
 .win-animation{
-  animation: bounce 1s infinite;
-  filter: drop-shadow(0 0 12px gold);
+  animation: winner 0.8s infinite alternate;
 }
 
-@keyframes bounce{
+@keyframes winner{
 
-  0%{
-    transform:translateY(0);
+  from{
+    transform: scale(1);
+    filter: drop-shadow(0 0 5px gold);
   }
 
-  50%{
-    transform:translateY(-25px);
-  }
-
-  100%{
-    transform:translateY(0);
+  to{
+    transform: scale(1.25);
+    filter: drop-shadow(0 0 20px gold);
   }
 }
+
+/* Back link */
 
 .back-link{
   text-decoration:none;
@@ -224,3 +237,4 @@ h2{
 .back-link:hover{
   color:#FF6B00;
 }
+  
