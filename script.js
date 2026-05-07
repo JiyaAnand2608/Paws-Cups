@@ -165,16 +165,16 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   // PLAYZONE PAGE FEATURES 
   // --- FEATURE 5: Find the Treat Game ---
-  const container = document.getElementById("cups-container");
-  const msg = document.getElementById("game-message");
+ const cupsContainer = document.getElementById("cups-container");
+  const gameMsg = document.getElementById("game-message");
 
-  
-  if (container && msg ) {
-   
+  if (cupsContainer && gameMsg) {
+    initPlayzone();
 
-    function initGame() {
-      container.innerHTML = "";
-      msg.textContent = "Pick a cup to start!";
+    function initPlayzone() {
+      cupsContainer.innerHTML = "";
+      gameMsg.textContent = "Pick a cup to help Bruno find his treat!";
+      gameMsg.style.color = "var(--dark)";
       
       let winningIndex = Math.floor(Math.random() * 3);
       let gameOver = false;
@@ -182,26 +182,37 @@ document.addEventListener("DOMContentLoaded", () => {
       for (let i = 0; i < 3; i++) {
         const cup = document.createElement("div");
         cup.className = "cup";
-        cup.textContent = "☕";
+        cup.textContent = "🍵"; // Using a nicer cup emoji
         
         cup.onclick = () => {
           if (gameOver) return;
           gameOver = true;
           
           if (i === winningIndex) {
-              cup.textContent = "🦴";
-              cup.classList.add("win-animation");
-              msg.textContent = "Yay! Bruno found the treat 🐾";
+            cup.textContent = "🦴"; // Bone
+            cup.classList.add("win-animation");
+            gameMsg.textContent = "Win a treat for your dog! 🦴";
+            gameMsg.classList.add("win-text");
           } else {
-              cup.textContent = "❌";
-              msg.textContent = "Better luck next time!🐾";
+            cup.textContent = "❌";
+            gameMsg.textContent = "Better luck next time! 🐾";
+            gameMsg.classList.add("lose-text");
           }
+
+          // Disable all cups
+          document.querySelectorAll('.cup').forEach(c => {
+            c.style.cursor = "default";
+            if (!c.classList.contains("win-animation") && c.textContent !== "❌") {
+              c.style.opacity = "0.5";
+            }
+          });
         };
         
-        container.appendChild(cup);
+        cupsContainer.appendChild(cup);
       }
     }
-
+  }
+});
 
 
   // CONTACT PAGE FEATURES (Used primarily on contact2.html)
