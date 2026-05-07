@@ -210,7 +210,7 @@ document.querySelectorAll('.cup').forEach(c => {
     c.style.opacity = "0.5";
   }
 });
-        };
+};
         
         cupsContainer.appendChild(cup);
       }
@@ -587,4 +587,5 @@ if (reviewBackdrop) {
     }
 
   });
-
+}
+});
