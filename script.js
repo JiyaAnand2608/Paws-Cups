@@ -391,27 +391,34 @@ document.addEventListener("DOMContentLoaded", () => {
     requestAnimationFrame(draw);
   }
 
+  // ───────── REVIEW MODAL ─────────
+
 let selectedStars = 0;
 
 // Open modal
 function openReviewModal() {
-  document
-    .getElementById('reviewModalBackdrop')
-    .classList.add('open');
+  const modal = document.getElementById('reviewModalBackdrop');
+
+  if (modal) {
+    modal.classList.add('open');
+  }
 }
 
 // Close modal
 function closeReviewModal() {
-  document
-    .getElementById('reviewModalBackdrop')
-    .classList.remove('open');
+  const modal = document.getElementById('reviewModalBackdrop');
+
+  if (modal) {
+    modal.classList.remove('open');
+  }
 }
 
-// Stars
+// Star picker
 const reviewStars = document.querySelectorAll('#starPicker span');
 
 reviewStars.forEach(star => {
 
+  // Click stars
   star.addEventListener('click', () => {
 
     selectedStars = parseInt(star.dataset.val);
@@ -422,6 +429,7 @@ reviewStars.forEach(star => {
 
   });
 
+  // Hover effect
   star.addEventListener('mouseenter', () => {
 
     const val = parseInt(star.dataset.val);
@@ -432,6 +440,7 @@ reviewStars.forEach(star => {
 
   });
 
+  // Remove hover
   star.addEventListener('mouseleave', () => {
 
     reviewStars.forEach((s, i) => {
@@ -464,18 +473,18 @@ function submitReview() {
     return;
   }
 
-  // Stars string
+  // Star display
   const starStr =
     '★'.repeat(selectedStars) +
     '☆'.repeat(5 - selectedStars);
 
-  // Avatar colors
+  // Random avatar colors
   const colorPairs = [
     { bg: 'var(--pink-mid)', color: '#fff' },
     { bg: 'var(--green)', color: 'var(--dark)' },
     { bg: 'var(--pink-main)', color: 'var(--dark)' },
     { bg: 'var(--dark)', color: '#fff' },
-    { bg: 'var(--pink-gradient-dark)', color: '#fff' },
+    { bg: 'var(--pink-gradient-dark)', color: '#fff' }
   ];
 
   const pair =
@@ -485,7 +494,7 @@ function submitReview() {
   const initial =
     name.charAt(0).toUpperCase();
 
-  // Create card
+  // Create review card
   const card = document.createElement('div');
 
   card.className = 'review-card';
@@ -515,42 +524,51 @@ function submitReview() {
     <span class="review-tag">✨ New Review</span>
   `;
 
-  // Insert review
+  // Add review to top
   const reviewsTrack =
     document.getElementById('reviewsTrack');
 
-  reviewsTrack.insertBefore(
-    card,
-    reviewsTrack.firstChild
-  );
+  if (reviewsTrack) {
+
+    reviewsTrack.insertBefore(
+      card,
+      reviewsTrack.firstChild
+    );
+
+  }
 
   // Close modal
   closeReviewModal();
 
   // Reset form
   document.getElementById('review-name').value = '';
-
   document.getElementById('review-pet').value = '';
-
   document.getElementById('review-text').value = '';
 
+  // Reset stars
   selectedStars = 0;
 
   reviewStars.forEach(s => {
     s.classList.remove('lit');
   });
 
-  // Success
-  alert('Thank you for your review, ' + name + '! 🐾');
+  // Success alert
+  alert(`Thank you for your review, ${name}! 🐾`);
+
 }
 
 // Click outside modal to close
-document
-  .getElementById('reviewModalBackdrop')
-  .addEventListener('click', function(e) {
+const reviewBackdrop =
+  document.getElementById('reviewModalBackdrop');
+
+if (reviewBackdrop) {
+
+  reviewBackdrop.addEventListener('click', function(e) {
 
     if (e.target === this) {
       closeReviewModal();
     }
 
   });
+
+}
