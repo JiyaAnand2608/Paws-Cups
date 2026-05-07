@@ -253,45 +253,55 @@ document.addEventListener("DOMContentLoaded", () => {
 //   }
 // }
 /* --- UPDATED JS in script.js --- */
+ const cupsContainer = document.getElementById("cups-container");
+  const gameMsg = document.getElementById("game-message");
 
-function initPlayzone() {
-  cupsContainer.innerHTML = "";
-  gameMsg.textContent = "Pick a cup to help Bruno find his treat!";
-  
-  let winningIndex = Math.floor(Math.random() * 3);
-  let gameOver = false;
+  if (cupsContainer && gameMsg) {
+    initPlayzone();
 
-  for (let i = 0; i < 3; i++) {
-    const cup = document.createElement("div");
-    cup.className = "cup";
-    cup.textContent = "🍵"; // Updated cup emoji
-    
-    cup.onclick = () => {
-      if (gameOver) return;
-      gameOver = true;
+    function initPlayzone() {
+      cupsContainer.innerHTML = "";
+      gameMsg.textContent = "Pick a cup to help Bruno find his treat!";
+      gameMsg.style.color = "var(--dark)";
       
-      if (i === winningIndex) {
-        cup.textContent = "🦴"; // Bone
-        cup.classList.add("win-animation");
-        gameMsg.textContent = "Win a treat for your dog! 🦴";
-        gameMsg.classList.add("win-text");
-      } else {
-        cup.textContent = "❌";
-        gameMsg.textContent = "Better luck next time! 🐾";
-        gameMsg.classList.add("lose-text");
-      }
+      let winningIndex = Math.floor(Math.random() * 3);
+      let gameOver = false;
 
-      // Disable clicks after choice
-      document.querySelectorAll('.cup').forEach(c => {
-        c.style.cursor = "default";
-        if (!c.classList.contains("win-animation") && c.textContent !== "❌") {
-          c.style.opacity = "0.5";
-        }
-      });
-    };
-    cupsContainer.appendChild(cup);
+      for (let i = 0; i < 3; i++) {
+        const cup = document.createElement("div");
+        cup.className = "cup";
+        cup.textContent = "🍵"; // Using a nicer cup emoji
+        
+        cup.onclick = () => {
+          if (gameOver) return;
+          gameOver = true;
+          
+          if (i === winningIndex) {
+            cup.textContent = "🦴"; // Bone
+            cup.classList.add("win-animation");
+            gameMsg.textContent = "Win a treat for your dog! 🦴";
+            gameMsg.classList.add("win-text");
+          } else {
+            cup.textContent = "❌";
+            gameMsg.textContent = "Better luck next time! 🐾";
+            gameMsg.classList.add("lose-text");
+          }
+
+          // Disable all cups
+          document.querySelectorAll('.cup').forEach(c => {
+            c.style.cursor = "default";
+            if (!c.classList.contains("win-animation") && c.textContent !== "❌") {
+              c.style.opacity = "0.5";
+            }
+          });
+        };
+        
+        cupsContainer.appendChild(cup);
+      }
+    }
   }
-}
+});
+
 
 
   // CONTACT PAGE FEATURES (Used primarily on contact2.html)
