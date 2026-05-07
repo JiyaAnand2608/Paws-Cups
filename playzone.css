@@ -1,50 +1,15 @@
-body{
-  min-height:100vh;
-
-  display:flex;
-
-  justify-content:center;
-
-  align-items:center;
-
-  background:
-    linear-gradient(
-      rgba(255,255,255,0.35),
-      rgba(255,255,255,0.35)
-    ),
-    url("playzone bg.png");
-
-  background-size:cover;
-
-  background-position:center;
-
-  background-repeat:no-repeat;
-}
 .game-container {
-  background: rgba(255, 251, 245, 0.82) !important;
-
-  backdrop-filter: blur(8px) !important;
-
+  background: #FFFBF5 !important;
   max-width: 700px !important;
-
   margin: 60px auto !important;
-
   padding: 60px 40px !important;
-
   border-radius: 40px !important;
-
-  box-shadow: 0 20px 60px rgba(60, 42, 33, 0.15) !important;
-
-  border: 1px solid rgba(255,255,255,0.4) !important;
-
+  box-shadow: 0 20px 60px rgba(60, 42, 33, 0.1) !important;
+  border: 1px solid rgba(232, 157, 157, 0.2) !important;
   text-align: center !important;
-
   display: flex !important;
-
   flex-direction: column !important;
-
   align-items: center !important;
-
   justify-content: center !important;
 }
 
