@@ -409,7 +409,7 @@ document.addEventListener("DOMContentLoaded", () => {
 let selectedStars = 0;
 
 // Open modal
-function openReviewModal() {
+window.openReviewModal = function() {
   const modal = document.getElementById('reviewModalBackdrop');
 
   if (modal) {
@@ -418,7 +418,7 @@ function openReviewModal() {
 }
 
 // Close modal
-function closeReviewModal() {
+window.closeReviewModal = function() {
   const modal = document.getElementById('reviewModalBackdrop');
 
   if (modal) {
@@ -465,7 +465,7 @@ reviewStars.forEach(star => {
 });
 
 // Submit review
-function submitReview() {
+window.submitReview = function() {
 
   const name =
     document.getElementById('review-name').value.trim();
