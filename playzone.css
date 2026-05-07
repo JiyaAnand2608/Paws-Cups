@@ -1,53 +1,3 @@
-/* .game-container {
-  background: #FFFBF5 !important;
-  max-width: 700px !important;
-  margin: 60px auto !important;
-  padding: 60px 40px !important;
-  border-radius: 40px !important;
-  box-shadow: 0 20px 60px rgba(60, 42, 33, 0.1) !important;
-  border: 1px solid rgba(232, 157, 157, 0.2) !important;
-  text-align: center !important;
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  justify-content: center !important;
-}
-
-.cups-row {
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  gap: 30px !important;
-  margin: 30px 0 50px 0 !important;
-  width: 100% !important;
-}
-
-.cup {
-  font-size: clamp(80px, 15vw, 110px) !important;
-  cursor: pointer !important;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
-  user-select: none !important;
-}
-
-.game-message {
-  font-size: 1.8rem !important;
-  font-weight: 800 !important;
-  margin-bottom: 40px !important;
-  color: #3C2A21 !important;
-}
-
-.win-animation {
-  animation: bounce 1s ease infinite alternate !important;
-}
-
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-  40% {transform: translateY(-30px);}
-  60% {transform: translateY(-15px);}
-}
-
- 
-     */
 *{
   margin:0;
   padding:0;
@@ -55,62 +5,40 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* BODY BACKGROUND IMAGE */
+
 body{
+
   min-height:100vh;
+
   display:flex;
+
   justify-content:center;
+
   align-items:center;
 
-  background: linear-gradient(135deg,#FFE5D9,#FFD7BA);
+  background:
+    linear-gradient(
+      rgba(255,255,255,0.45),
+      rgba(255,255,255,0.45)
+    ),
+    url("background.png");
+
+  background-size:cover;
+
+  background-position:center;
+
+  background-repeat:no-repeat;
 
   overflow:hidden;
-  position:relative;
 }
 
-/* Floating paw background */
-
-body::before,
-body::after{
-  content:"🐾 🐾 🐾 🐾";
-
-  position:absolute;
-
-  font-size:45px;
-
-  opacity:0.12;
-
-  animation: floatPaws 12s linear infinite;
-}
-
-body::before{
-  top:15%;
-  left:-30%;
-}
-
-body::after{
-  bottom:15%;
-  right:-30%;
-  animation-delay:6s;
-}
-
-@keyframes floatPaws{
-
-  from{
-    transform:translateX(0);
-  }
-
-  to{
-    transform:translateX(160vw);
-  }
-}
-
-/* Main container */
+/* MAIN CONTAINER */
 
 .game-container{
 
-  background:#fffaf5;
-
   width:85%;
+
   max-width:750px;
 
   padding:50px 40px;
@@ -119,155 +47,94 @@ body::after{
 
   text-align:center;
 
-  border:4px dashed #ffb38a;
+  background:rgba(255,255,255,0.72);
 
-  box-shadow:0 20px 50px rgba(0,0,0,0.12);
+  backdrop-filter:blur(10px);
 
-  position:relative;
-  z-index:2;
+  box-shadow:0 20px 50px rgba(0,0,0,0.15);
+
+  border:2px solid rgba(255,255,255,0.4);
 }
 
+/* TITLE */
+
 h2{
+
   font-size:3rem;
+
   color:#5C3D2E;
+
   margin-bottom:10px;
 }
 
+/* SUBTITLE */
+
 .subtitle{
+
   color:#6B4F4F;
+
   font-size:1.2rem;
+
   margin-bottom:35px;
 }
 
-/* Cups Row */
+/* BALLS ROW */
 
 .cups-row{
-  display:flex;
-  justify-content:center;
-  gap:45px;
-  margin:50px 0;
-  flex-wrap:wrap;
 
-  perspective:1000px;
+  display:flex;
+
+  justify-content:center;
+
+  gap:40px;
+
+  margin:50px 0;
+
+  flex-wrap:wrap;
 }
 
-/* 3D Cup */
+/* TENNIS BALLS */
 
 .cup{
 
-  width:130px;
-  height:160px;
-
-  position:relative;
-
-  background: linear-gradient(
-    to right,
-    #6f3f1b 0%,
-    #b5651d 20%,
-    #d28b36 50%,
-    #b5651d 80%,
-    #6f3f1b 100%
-  );
-
-  border-radius:0 0 65px 65px;
+  font-size:120px;
 
   cursor:pointer;
 
-  transition:all 0.3s ease;
+  transition:0.3s ease;
 
-  box-shadow:
-    inset -10px -10px 20px rgba(0,0,0,0.25),
-    inset 10px 10px 20px rgba(255,255,255,0.15),
-    0 15px 25px rgba(0,0,0,0.25);
+  animation:bounceBall 1.8s infinite ease-in-out;
 
-  transform-style:preserve-3d;
+  user-select:none;
 
-  animation: floatCup 2s ease-in-out infinite;
-
-  display:flex;
-  justify-content:center;
-  align-items:center;
-
-  font-size:50px;
-  color:white;
+  filter:drop-shadow(0 10px 12px rgba(0,0,0,0.2));
 }
 
-/* Cup top rim */
-
-.cup::before{
-
-  content:"";
-
-  width:140px;
-  height:22px;
-
-  background: linear-gradient(
-    to right,
-    #5c3214,
-    #d89b4f,
-    #5c3214
-  );
-
-  position:absolute;
-
-  top:-12px;
-  left:-5px;
-
-  border-radius:50%;
-
-  box-shadow:
-    inset 0 3px 5px rgba(255,255,255,0.3),
-    0 4px 10px rgba(0,0,0,0.2);
-}
-
-/* Cup inner shadow */
-
-.cup::after{
-
-  content:"";
-
-  width:90px;
-  height:18px;
-
-  background: rgba(0,0,0,0.15);
-
-  position:absolute;
-
-  top:8px;
-  left:20px;
-
-  border-radius:50%;
-}
-
-/* Hover effect */
+/* HOVER EFFECT */
 
 .cup:hover{
 
-  transform:
-    rotateX(10deg)
-    rotateY(-10deg)
-    scale(1.08)
-    translateY(-12px);
+  transform:scale(1.15) rotate(-12deg);
 }
 
-/* Floating animation */
+/* BALL ANIMATION */
 
-@keyframes floatCup{
+@keyframes bounceBall{
 
   0%{
-    transform: translateY(0px);
+    transform:translateY(0);
   }
 
   50%{
-    transform: translateY(-12px);
+    transform:translateY(-18px);
   }
 
   100%{
-    transform: translateY(0px);
+    transform:translateY(0);
   }
 }
 
-/* Message */
+/* MESSAGE */
 
 .game-message{
 
@@ -280,53 +147,41 @@ h2{
   min-height:50px;
 
   margin-bottom:20px;
-
-  animation: fadeIn 0.5s ease;
 }
 
-@keyframes fadeIn{
-
-  from{
-    opacity:0;
-    transform:translateY(10px);
-  }
-
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-}
-
-/* Win and Lose */
+/* WIN */
 
 .win-text{
   color:#2E8B57;
 }
 
+/* LOSE */
+
 .lose-text{
   color:#D7263D;
 }
 
-/* Winning Cup Animation */
+/* WIN ANIMATION */
 
 .win-animation{
-  animation: winner 0.8s infinite alternate;
+
+  animation:winner 0.7s infinite alternate;
 }
 
 @keyframes winner{
 
   from{
-    transform: scale(1);
-    filter: drop-shadow(0 0 5px gold);
+    transform:scale(1);
+    filter:drop-shadow(0 0 5px gold);
   }
 
   to{
-    transform: scale(1.15);
-    filter: drop-shadow(0 0 20px gold);
+    transform:scale(1.2);
+    filter:drop-shadow(0 0 20px gold);
   }
 }
 
-/* Back link */
+/* BACK LINK */
 
 .back-link{
 
@@ -340,7 +195,6 @@ h2{
 }
 
 .back-link:hover{
+
   color:#FF6B00;
 }
-
-
