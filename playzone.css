@@ -1,200 +1,47 @@
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family: Arial, Helvetica, sans-serif;
+.game-container {
+  background: #FFFBF5 !important;
+  max-width: 700px !important;
+  margin: 60px auto !important;
+  padding: 60px 40px !important;
+  border-radius: 40px !important;
+  box-shadow: 0 20px 60px rgba(60, 42, 33, 0.1) !important;
+  border: 1px solid rgba(232, 157, 157, 0.2) !important;
+  text-align: center !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
-/* BODY BACKGROUND IMAGE */
-
-body{
-
-  min-height:100vh;
-
-  display:flex;
-
-  justify-content:center;
-
-  align-items:center;
-
-  background:
-    linear-gradient(
-      rgba(255,255,255,0.45),
-      rgba(255,255,255,0.45)
-    ),
-    url("background.png");
-
-  background-size:cover;
-
-  background-position:center;
-
-  background-repeat:no-repeat;
-
-  overflow:hidden;
+.cups-row {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 30px !important;
+  margin: 30px 0 50px 0 !important;
+  width: 100% !important;
 }
 
-/* MAIN CONTAINER */
-
-.game-container{
-
-  width:85%;
-
-  max-width:750px;
-
-  padding:50px 40px;
-
-  border-radius:35px;
-
-  text-align:center;
-
-  background:rgba(255,255,255,0.72);
-
-  backdrop-filter:blur(10px);
-
-  box-shadow:0 20px 50px rgba(0,0,0,0.15);
-
-  border:2px solid rgba(255,255,255,0.4);
+.cup {
+  font-size: clamp(80px, 15vw, 110px) !important;
+  cursor: pointer !important;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  user-select: none !important;
 }
 
-/* TITLE */
-
-h2{
-
-  font-size:3rem;
-
-  color:#5C3D2E;
-
-  margin-bottom:10px;
+.game-message {
+  font-size: 1.8rem !important;
+  font-weight: 800 !important;
+  margin-bottom: 40px !important;
+  color: #3C2A21 !important;
 }
 
-/* SUBTITLE */
-
-.subtitle{
-
-  color:#6B4F4F;
-
-  font-size:1.2rem;
-
-  margin-bottom:35px;
+.win-animation {
+  animation: bounce 1s ease infinite alternate !important;
 }
 
-/* BALLS ROW */
-
-.cups-row{
-
-  display:flex;
-
-  justify-content:center;
-
-  gap:40px;
-
-  margin:50px 0;
-
-  flex-wrap:wrap;
-}
-
-/* TENNIS BALLS */
-
-.cup{
-
-  font-size:120px;
-
-  cursor:pointer;
-
-  transition:0.3s ease;
-
-  animation:bounceBall 1.8s infinite ease-in-out;
-
-  user-select:none;
-
-  filter:drop-shadow(0 10px 12px rgba(0,0,0,0.2));
-}
-
-/* HOVER EFFECT */
-
-.cup:hover{
-
-  transform:scale(1.15) rotate(-12deg);
-}
-
-/* BALL ANIMATION */
-
-@keyframes bounceBall{
-
-  0%{
-    transform:translateY(0);
-  }
-
-  50%{
-    transform:translateY(-18px);
-  }
-
-  100%{
-    transform:translateY(0);
-  }
-}
-
-/* MESSAGE */
-
-.game-message{
-
-  font-size:1.8rem;
-
-  font-weight:bold;
-
-  color:#3C2A21;
-
-  min-height:50px;
-
-  margin-bottom:20px;
-}
-
-/* WIN */
-
-.win-text{
-  color:#2E8B57;
-}
-
-/* LOSE */
-
-.lose-text{
-  color:#D7263D;
-}
-
-/* WIN ANIMATION */
-
-.win-animation{
-
-  animation:winner 0.7s infinite alternate;
-}
-
-@keyframes winner{
-
-  from{
-    transform:scale(1);
-    filter:drop-shadow(0 0 5px gold);
-  }
-
-  to{
-    transform:scale(1.2);
-    filter:drop-shadow(0 0 20px gold);
-  }
-}
-
-/* BACK LINK */
-
-.back-link{
-
-  text-decoration:none;
-
-  color:#6B4F4F;
-
-  font-weight:bold;
-
-  transition:0.3s;
-}
-
-.back-link:hover{
-
-  color:#FF6B00;
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+  40% {transform: translateY(-30px);}
+  60% {transform: translateY(-15px);}
 }
