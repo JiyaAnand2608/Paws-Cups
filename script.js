@@ -199,13 +199,17 @@ document.addEventListener("DOMContentLoaded", () => {
             gameMsg.classList.add("lose-text");
           }
 
-          Disable all cups
-          document.querySelectorAll('.cup').forEach(c => {
-            c.style.cursor = "default";
-            if (!c.classList.contains("win-animation") && c.textContent !== "❌") {
-              c.style.opacity = "0.5";
-            }
-          });
+         // Disable all cups
+document.querySelectorAll('.cup').forEach(c => {
+  c.style.cursor = "default";
+
+  if (
+    !c.classList.contains("win-animation") &&
+    c.textContent !== "❌"
+  ) {
+    c.style.opacity = "0.5";
+  }
+});
         };
         
         cupsContainer.appendChild(cup);
