@@ -1,80 +1,43 @@
 /* ═══════════════════════════════════════════
-   PLAYZONE SECTION — Playzone.html
-═══════════════════════════════════════════ */
+  /* --- UPDATED CSS in style2.css --- */
 
-/* Main container for the game */
 .game-container {
-  background: var(--card-bg);
-  max-width: 650px;
-  margin: 40px auto;
-  padding: 50px 35px;
-  border-radius: var(--round);
-  box-shadow: var(--box-shadow);
-  border: 1px solid var(--border);
+  background: #FFFBF5; /* Cream card background */
+  max-width: 700px;
+  margin: 60px auto;
+  padding: 60px 40px;
+  border-radius: 40px;
+  box-shadow: 0 20px 60px rgba(60, 42, 33, 0.1);
+  border: 1px solid rgba(232, 157, 157, 0.2);
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Header style inside the game */
 .game-container h2 {
-  font-size: 2.8rem;
-  margin-bottom: 15px;
-  color: var(--pink-gradient-dark);
+  font-family: var(--main-font);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  color: #D68181; /* Pink header */
+  font-weight: 800;
+  margin-bottom: 20px;
 }
 
-/* Row layout for the cups */
 .cups-row {
   display: flex;
   justify-content: center;
-  gap: 40px;
-  margin: 45px 0;
+  align-items: center;
+  gap: 30px;
+  margin: 30px 0 50px 0;
+  width: 100%;
 }
 
-/* Individual cup styling and hover effects */
 .cup {
-  font-size: clamp(60px, 12vw, 100px);
+  font-size: clamp(80px, 15vw, 110px);
   cursor: pointer;
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s;
-  user-select: none;
-}
-
-.cup:hover {
-  transform: translateY(-15px) scale(1.1);
-}
-
-/* Message styling */
-.game-message {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 30px;
-  min-height: 40px;
-  color: var(--dark);
-  transition: color 0.3s;
-}
-
-/* Message colors for win/loss states */
-.win-text { color: var(--pink-gradient-dark); }
-.lose-text { color: #888; }
-
-/* Back button link styling */
-.back-link {
-  display: inline-block;
-  margin-top: 35px;
-  color: var(--pink-mid);
-  text-decoration: none;
-  font-weight: 700;
-  transition: all 0.2s;
-}
-
-.back-link:hover {
-  color: var(--dark);
-  transform: translateX(-5px);
-}
-
-/* Animation for the winning treat (Bone) */
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-  40% {transform: translateY(-25px);}
-  60% {transform: translateY(-12px);}
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
 }
 
 .win-animation {
