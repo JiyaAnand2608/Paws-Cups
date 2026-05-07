@@ -390,47 +390,79 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     requestAnimationFrame(draw);
   }
- let sel = 0;
-const rStars = document.querySelectorAll('#starPicker span');
+ // ── REVIEW MODAL ──
+let selectedStars = 0;
 
-function openReviewModal()  { document.getElementById('reviewModalBackdrop').classList.add('open'); }
-function closeReviewModal() { document.getElementById('reviewModalBackdrop').classList.remove('open'); }
+function openReviewModal() {
+  document.getElementById('reviewModalBackdrop').classList.add('open');
+}
+function closeReviewModal() {
+  document.getElementById('reviewModalBackdrop').classList.remove('open');
+}
 
-rStars.forEach(s => {
-  s.addEventListener('click',      () => { sel = +s.dataset.val; highlight(sel); });
-  s.addEventListener('mouseenter', () => highlight(+s.dataset.val));
-  s.addEventListener('mouseleave', () => highlight(sel));
+const reviewStars = document.querySelectorAll('#starPicker span');
+reviewStars.forEach(star => {
+  star.addEventListener('click', () => {
+    selectedStars = parseInt(star.dataset.val);
+    reviewStars.forEach((s, i) => s.classList.toggle('lit', i < selectedStars));
+  });
+  star.addEventListener('mouseenter', () => {
+    const val = parseInt(star.dataset.val);
+    reviewStars.forEach((s, i) => s.classList.toggle('lit', i < val));
+  });
+  star.addEventListener('mouseleave', () => {
+    reviewStars.forEach((s, i) => s.classList.toggle('lit', i < selectedStars));
+  });
 });
-function highlight(n) { rStars.forEach((s,i) => s.classList.toggle('lit', i < n)); }
 
 function submitReview() {
   const name = document.getElementById('review-name').value.trim();
   const pet  = document.getElementById('review-pet').value.trim();
   const text = document.getElementById('review-text').value.trim();
-  if (!name || !text || !sel) return alert('Please fill name, stars and review!');
 
-  const palettes = [['var(--pink-mid)','#fff'],['var(--green)','var(--dark)'],['var(--dark)','#fff'],['var(--pink-gradient-dark)','#fff']];
-  const [bg, color] = palettes[Math.floor(Math.random() * palettes.length)];
+  if (!name || !text || selectedStars === 0) {
+    alert('Please fill in your name, rating, and review before posting!');
+    return;
+  }
+
+  const starStr = '★'.repeat(selectedStars) + '☆'.repeat(5 - selectedStars);
+  const colorPairs = [
+    { bg: 'var(--pink-mid)',           color: '#fff' },
+    { bg: 'var(--green)',              color: 'var(--dark)' },
+    { bg: 'var(--pink-main)',          color: 'var(--dark)' },
+    { bg: 'var(--dark)',               color: '#fff' },
+    { bg: 'var(--pink-gradient-dark)', color: '#fff' },
+  ];
+  const pair    = colorPairs[Math.floor(Math.random() * colorPairs.length)];
+  const initial = name.charAt(0).toUpperCase();
 
   const card = document.createElement('div');
   card.className = 'review-card';
   card.innerHTML = `
     <div class="review-top">
-      <div class="reviewer-avatar" style="background:${bg};color:${color};">${name[0].toUpperCase()}</div>
-      <div><p class="reviewer-name">${name}</p><p class="reviewer-pet">${pet || 'Solo visitor'}</p></div>
+      <div class="reviewer-avatar" style="background:${pair.bg}; color:${pair.color};">${initial}</div>
+      <div class="reviewer-info">
+        <p class="reviewer-name">${name}</p>
+        <p class="reviewer-pet">${pet ? 'with ' + pet : 'Solo visitor'}</p>
+      </div>
     </div>
-    <div class="review-stars">${'★'.repeat(sel)}${'☆'.repeat(5-sel)}</div>
+    <div class="review-stars">${starStr}</div>
     <p class="review-text">${text}</p>
-    <span class="review-tag">✨ New</span>`;
+    <span class="review-tag">✨ New Review</span>
+  `;
 
-  document.getElementById('reviewsTrack').prepend(card);
+  document.getElementById('reviewsTrack').insertBefore(card, reviewsTrack.firstChild);
   closeReviewModal();
-  ['review-name','review-pet','review-text'].forEach(id => document.getElementById(id).value = '');
-  sel = 0; highlight(0);
-  alert('Thanks for your review, ' + name + '! 🐾');
+
+  document.getElementById('review-name').value = '';
+  document.getElementById('review-pet').value  = '';
+  document.getElementById('review-text').value = '';
+  selectedStars = 0;
+  reviewStars.forEach(s => s.classList.remove('lit'));
+
+  alert('Thank you for your review, ' + name + '! 🐾');
 }
 
 document.getElementById('reviewModalBackdrop').addEventListener('click', function(e) {
   if (e.target === this) closeReviewModal();
-});
 });
