@@ -174,16 +174,14 @@ document.addEventListener("DOMContentLoaded", () => {
     function initPlayzone() {
       cupsContainer.innerHTML = "";
       gameMsg.textContent = "Pick a cup to help Bruno find his treat!";
-      gameMsg.style.color = "var(--dark)";
-      
+     
       let winningIndex = Math.floor(Math.random() * 3);
       let gameOver = false;
 
       for (let i = 0; i < 3; i++) {
         const cup = document.createElement("div");
         cup.className = "cup";
-        cup.textContent = "🍵"; // Using a nicer cup emoji
-        
+        cup.textContent = "🍵"; 
         cup.onclick = () => {
           if (gameOver) return;
           gameOver = true;
@@ -199,17 +197,7 @@ document.addEventListener("DOMContentLoaded", () => {
             gameMsg.classList.add("lose-text");
           }
 
-         // Disable all cups
-document.querySelectorAll('.cup').forEach(c => {
-  c.style.cursor = "default";
-
-  if (
-    !c.classList.contains("win-animation") &&
-    c.textContent !== "❌"
-  ) {
-    c.style.opacity = "0.5";
-  }
-});
+        
 };
         
         cupsContainer.appendChild(cup);
