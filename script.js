@@ -1,5 +1,12 @@
+// Ensure the DOM is fully loaded before running scripts
 document.addEventListener("DOMContentLoaded", () => {
- // --- FEATURE 1: Dynamic Greeting ---
+
+  // ==========================================
+  // HOME PAGE FEATURES (Used primarily on index2.html)
+  // ==========================================
+
+  // --- FEATURE 1: Dynamic Greeting ---
+  // Checks the time of day and updates the <p id="status"> tag.
   const statusElement = document.getElementById("status");
   if (statusElement) {
     let hour = new Date().getHours();
@@ -16,12 +23,19 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // --- FEATURE 2: Fun Secret Message ---
+  // Changes the text of the small top tag when clicked.
   let topTag = document.querySelector(".top-tag");
   if (topTag) {
     topTag.onclick = function() {
       topTag.innerText = "Surprise! You just gave a virtual belly rub to a puppy! 🐶💕";
     };
   }
+
+
+  // ==========================================
+  // GLOBAL NAVBAR FEATURES (Used on ALL HTML pages)
+  // ==========================================
+
   // --- Mobile Menu Toggle ---
   const menuIcon = document.querySelector('.menu-icon');
   const navLinks = document.querySelector('.nav-links');
@@ -31,7 +45,12 @@ document.addEventListener("DOMContentLoaded", () => {
           navLinks.classList.toggle('active');
       });
   }
-  // MENU PAGE FEATURES 
+
+  // ==========================================
+  // MENU PAGE FEATURES (Used primarily on menu2.html)
+  // ==========================================
+
+  // --- Menu Search Filter ---
   const searchInput = document.getElementById('menuSearch');
   const menuCards = document.querySelectorAll('.menu-card');
 
@@ -54,22 +73,24 @@ document.addEventListener("DOMContentLoaded", () => {
               });
 
               if (cardMatches || filter === "") {
-                  card.style.display = 'block';
+                  card.style.display = 'block'; // Show card if any item matches
                   if (filter === "") {
                       menuItems.forEach(item => item.style.display = 'flex');
                   }
               } else {
-                  card.style.display = 'none'; 
+                  card.style.display = 'none'; // Hide card if no match
               }
           });
       });
   }
 
+  // --- Advanced Cart Functionality ---
   let cartTotal = 0;
   let cartCount = 0;
   const cartCountEl = document.getElementById('cart-count');
   const cartTotalEl = document.getElementById('cart-total');
 
+  // Track quantities for each unique item
   const itemQuantities = {};
 
   function updateCartUI() {
@@ -82,6 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (cartCountEl && cartTotalEl) {
       const menuItems = document.querySelectorAll('.menu-list li');
       menuItems.forEach(item => {
+          // Find the elements inside the list item
           const nameEl = item.querySelector('span:first-child');
           const priceEl = item.querySelector('.price');
           
@@ -92,11 +114,14 @@ document.addEventListener("DOMContentLoaded", () => {
           const price = parseInt(priceText, 10);
           
           if (isNaN(price)) return;
+
+          // Initialize this item's quantity to 0
           itemQuantities[itemName] = 0;
 
+          // Create the + / - quantity controls (hidden by default)
           const qtyControl = document.createElement('div');
           qtyControl.className = 'qty-control';
-          qtyControl.style.display = 'none'; 
+          qtyControl.style.display = 'none'; // Hidden until item is added to cart
 
           const minusBtn = document.createElement('button');
           minusBtn.className = 'qty-btn';
@@ -114,10 +139,12 @@ document.addEventListener("DOMContentLoaded", () => {
           qtyControl.appendChild(qtyText);
           qtyControl.appendChild(plusBtn);
 
-
+          // Append it to the list item
           item.appendChild(qtyControl);
 
+          // Main click handler: adding the item for the first time
           item.addEventListener('click', (e) => {
+              // If user clicks on the + or - buttons, ignore this handler
               if (e.target.closest('.qty-control')) return;
 
               if (itemQuantities[itemName] === 0) {
@@ -126,19 +153,22 @@ document.addEventListener("DOMContentLoaded", () => {
                   cartTotal += price;
                   updateCartUI();
 
+                  // Show the controls and update the number
                   qtyText.textContent = itemQuantities[itemName];
                   qtyControl.style.display = 'flex';
 
+                  // Brief visual flash effect to show it was added to cart
                   const originalBg = item.style.backgroundColor;
-                  item.style.backgroundColor = 'rgba(122, 202, 181, 0.4)';
+                  item.style.backgroundColor = 'rgba(122, 202, 181, 0.4)'; // green tint
                   setTimeout(() => {
                       item.style.backgroundColor = originalBg;
                   }, 300);
               }
           });
 
+          // Plus button handler
           plusBtn.addEventListener('click', (e) => {
-              e.stopPropagation(); 
+              e.stopPropagation(); // Prevent the main list item from clicking
               itemQuantities[itemName]++;
               cartCount++;
               cartTotal += price;
@@ -146,14 +176,16 @@ document.addEventListener("DOMContentLoaded", () => {
               updateCartUI();
           });
 
+          // Minus button handler
           minusBtn.addEventListener('click', (e) => {
-              e.stopPropagation();
+              e.stopPropagation(); // Prevent the main list item from clicking
               if (itemQuantities[itemName] > 0) {
                   itemQuantities[itemName]--;
                   cartCount--;
                   cartTotal -= price;
                   
                   if (itemQuantities[itemName] === 0) {
+                      // Completely removed from cart, so hide the controls
                       qtyControl.style.display = 'none';
                   } else {
                       qtyText.textContent = itemQuantities[itemName];
@@ -163,52 +195,12 @@ document.addEventListener("DOMContentLoaded", () => {
           });
       });
   }
-  // PLAYZONE PAGE FEATURES 
-  // --- FEATURE 5: Find the Treat Game ---
- const cupsContainer = document.getElementById("cups-container");
-  const gameMsg = document.getElementById("game-message");
-
-  if (cupsContainer && gameMsg) {
-    initPlayzone();
-
-    function initPlayzone() {
-      cupsContainer.innerHTML = "";
-      gameMsg.textContent = "Pick a cup to help Bruno find his treat!";
-      gameMsg.className = "game-message";
-     
-      let winningIndex = Math.floor(Math.random() * 3);
-      let gameOver = false;
-
-      for (let i = 0; i < 3; i++) {
-        const cup = document.createElement("div");
-        cup.className = "cup";
-        cup.textContent = "☕"; 
-        cup.onclick = () => {
-          if (gameOver) return;
-          gameOver = true;
-          
-          if (i === winningIndex) {
-            cup.textContent = "🦴"; // Bone
-            cup.classList.add("win-animation");
-            gameMsg.textContent = "Win a treat for your dog! 🦴";
-            gameMsg.classList.add("win-text");
-          } else {
-            cup.textContent = "❌";
-            gameMsg.textContent = "Better luck next time! 🐾";
-            gameMsg.classList.add("lose-text");
-          }
-
-        
-        };
-        
-        cupsContainer.appendChild(cup);
-      }
-    }
-  }
-});
 
 
+  // ==========================================
   // CONTACT PAGE FEATURES (Used primarily on contact2.html)
+  // ==========================================
+
   /* ── Mode Toggle ── */
   const toggle = document.getElementById('modeToggle');
   const lblH   = document.getElementById('lbl-human');
@@ -246,14 +238,16 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
-
+  
+  /* ── Seat Pills ── */
   document.querySelectorAll('.seat-pill').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.seat-pill').forEach(b => b.classList.remove('sel'));
       btn.classList.add('sel');
     });
   });
-
+  
+  /* ── Birthday Toggle ── */
   const bdayToggle = document.getElementById('bdayToggle');
   let isBday = false;
   if (bdayToggle) {
@@ -263,7 +257,8 @@ document.addEventListener("DOMContentLoaded", () => {
       if (isBday) launchConfetti();
     });
   }
-
+  
+  /* ── Book Button ── */
   const bookBtn = document.getElementById('bookBtn');
   if (bookBtn) {
     bookBtn.addEventListener('click', function(e) {
@@ -304,7 +299,8 @@ document.addEventListener("DOMContentLoaded", () => {
       if (e.target === this) closeModal();
     });
   }
-
+  
+  /* ── Send Message ── */
   const sendBtn = document.getElementById('sendBtn');
   if (sendBtn) {
     sendBtn.addEventListener('click', () => {
@@ -324,7 +320,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
-
+  
+  /* ── Confetti ── */
   function launchConfetti() {
     const canvas = document.getElementById('confetti-canvas');
     if (!canvas) return;
@@ -396,185 +393,48 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     requestAnimationFrame(draw);
   }
+  // PLAYZONE PAGE FEATURES 
+  const cupsContainer = document.getElementById("cups-container");
+  const gameMsg = document.getElementById("game-message");
 
-  // ───────── REVIEW MODAL ─────────
+  if (cupsContainer && gameMsg) {
+    initPlayzone();
 
-let selectedStars = 0;
+    function initPlayzone() {
+      cupsContainer.innerHTML = "";
+      gameMsg.textContent = "Pick a cup to help Bruno find his treat!";
+      gameMsg.style.color = "var(--dark)";
+      
+      let winningIndex = Math.floor(Math.random() * 3);
+      let gameOver = false;
 
-// Open modal
-window.openReviewModal = function() {
-  const modal = document.getElementById('reviewModalBackdrop');
+      for (let i = 0; i < 3; i++) {
+        const cup = document.createElement("div");
+        cup.className = "cup";
+        cup.textContent = "☕";
+        
+        cup.onclick = () => {
+          if (gameOver) return;
+          gameOver = true;
+          
+          if (i === winningIndex) {
+            cup.textContent = "🦴"; 
+            cup.classList.add("win-animation");
+            gameMsg.textContent =  "Hurray!Treat for your dog! 🦴";
+            gameMsg.classList.add("win-text");
+          } else {
 
-  if (modal) {
-    modal.classList.add('open');
-  }
-}
+            cup.textContent = "❌";
+            gameMsg.textContent = "Better luck next time! 🐾";
+            gameMsg.classList.add("lose-text");
+          }
 
-// Close modal
-window.closeReviewModal = function() {
-  const modal = document.getElementById('reviewModalBackdrop');
-
-  if (modal) {
-    modal.classList.remove('open');
-  }
-}
-
-// Star picker
-const reviewStars = document.querySelectorAll('#starPicker span');
-
-reviewStars.forEach(star => {
-
-  // Click stars
-  star.addEventListener('click', () => {
-
-    selectedStars = parseInt(star.dataset.val);
-
-    reviewStars.forEach((s, i) => {
-      s.classList.toggle('lit', i < selectedStars);
-    });
-
-  });
-
-  // Hover effect
-  star.addEventListener('mouseenter', () => {
-
-    const val = parseInt(star.dataset.val);
-
-    reviewStars.forEach((s, i) => {
-      s.classList.toggle('lit', i < val);
-    });
-
-  });
-
-  // Remove hover
-  star.addEventListener('mouseleave', () => {
-
-    reviewStars.forEach((s, i) => {
-      s.classList.toggle('lit', i < selectedStars);
-    });
-
-  });
-
-});
-
-// Submit review
-window.submitReview = function() {
-
-  const name =
-    document.getElementById('review-name').value.trim();
-
-  const pet =
-    document.getElementById('review-pet').value.trim();
-
-  const text =
-    document.getElementById('review-text').value.trim();
-
-  // Validation
-  if (!name || !text || selectedStars === 0) {
-
-    alert(
-      'Please fill in your name, rating, and review before posting!'
-    );
-
-    return;
-  }
-
-  // Star display
-  const starStr =
-    '★'.repeat(selectedStars) +
-    '☆'.repeat(5 - selectedStars);
-
-  // Random avatar colors
-  const colorPairs = [
-    { bg: 'var(--pink-mid)', color: '#fff' },
-    { bg: 'var(--green)', color: 'var(--dark)' },
-    { bg: 'var(--pink-main)', color: 'var(--dark)' },
-    { bg: 'var(--dark)', color: '#fff' },
-    { bg: 'var(--pink-gradient-dark)', color: '#fff' }
-  ];
-
-  const pair =
-    colorPairs[Math.floor(Math.random() * colorPairs.length)];
-
-  // Initial
-  const initial =
-    name.charAt(0).toUpperCase();
-
-  // Create review card
-  const card = document.createElement('div');
-
-  card.className = 'review-card';
-
-  card.innerHTML = `
-    <div class="review-top">
-
-      <div class="reviewer-avatar"
-        style="background:${pair.bg}; color:${pair.color};">
-        ${initial}
-      </div>
-
-      <div class="reviewer-info">
-        <p class="reviewer-name">${name}</p>
-
-        <p class="reviewer-pet">
-          ${pet ? 'with ' + pet : 'Solo visitor'}
-        </p>
-      </div>
-
-    </div>
-
-    <div class="review-stars">${starStr}</div>
-
-    <p class="review-text">${text}</p>
-
-    <span class="review-tag">✨ New Review</span>
-  `;
-
-  // Add review to top
-  const reviewsTrack =
-    document.getElementById('reviewsTrack');
-
-  if (reviewsTrack) {
-
-    reviewsTrack.insertBefore(
-      card,
-      reviewsTrack.firstChild
-    );
-
-  }
-
-  // Close modal
-  closeReviewModal();
-
-  // Reset form
-  document.getElementById('review-name').value = '';
-  document.getElementById('review-pet').value = '';
-  document.getElementById('review-text').value = '';
-
-  // Reset stars
-  selectedStars = 0;
-
-  reviewStars.forEach(s => {
-    s.classList.remove('lit');
-  });
-
-  // Success alert
-  alert(`Thank you for your review, ${name}! 🐾`);
-
-}
-
-// Click outside modal to close
-const reviewBackdrop =
-  document.getElementById('reviewModalBackdrop');
-
-if (reviewBackdrop) {
-
-  reviewBackdrop.addEventListener('click', function(e) {
-
-    if (e.target === this) {
-      closeReviewModal();
+      
+        };
+        
+        cupsContainer.appendChild(cup);
+      }
     }
-
-  });
-}
+  }
 });
+
