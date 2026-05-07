@@ -1,12 +1,5 @@
-// Ensure the DOM is fully loaded before running scripts
 document.addEventListener("DOMContentLoaded", () => {
-
-  // ==========================================
-  // HOME PAGE FEATURES (Used primarily on index2.html)
-  // ==========================================
-
-  // --- FEATURE 1: Dynamic Greeting ---
-  // Checks the time of day and updates the <p id="status"> tag.
+ // --- FEATURE 1: Dynamic Greeting ---
   const statusElement = document.getElementById("status");
   if (statusElement) {
     let hour = new Date().getHours();
@@ -23,19 +16,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // --- FEATURE 2: Fun Secret Message ---
-  // Changes the text of the small top tag when clicked.
   let topTag = document.querySelector(".top-tag");
   if (topTag) {
     topTag.onclick = function() {
       topTag.innerText = "Surprise! You just gave a virtual belly rub to a puppy! 🐶💕";
     };
   }
-
-
-  // ==========================================
-  // GLOBAL NAVBAR FEATURES (Used on ALL HTML pages)
-  // ==========================================
-
   // --- Mobile Menu Toggle ---
   const menuIcon = document.querySelector('.menu-icon');
   const navLinks = document.querySelector('.nav-links');
@@ -45,12 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
           navLinks.classList.toggle('active');
       });
   }
-
-  // ==========================================
-  // MENU PAGE FEATURES (Used primarily on menu2.html)
-  // ==========================================
-
-  // --- Menu Search Filter ---
+  // MENU PAGE FEATURES 
   const searchInput = document.getElementById('menuSearch');
   const menuCards = document.querySelectorAll('.menu-card');
 
@@ -73,24 +54,22 @@ document.addEventListener("DOMContentLoaded", () => {
               });
 
               if (cardMatches || filter === "") {
-                  card.style.display = 'block'; // Show card if any item matches
+                  card.style.display = 'block';
                   if (filter === "") {
                       menuItems.forEach(item => item.style.display = 'flex');
                   }
               } else {
-                  card.style.display = 'none'; // Hide card if no match
+                  card.style.display = 'none'; 
               }
           });
       });
   }
 
-  // --- Advanced Cart Functionality ---
   let cartTotal = 0;
   let cartCount = 0;
   const cartCountEl = document.getElementById('cart-count');
   const cartTotalEl = document.getElementById('cart-total');
 
-  // Track quantities for each unique item
   const itemQuantities = {};
 
   function updateCartUI() {
@@ -103,7 +82,6 @@ document.addEventListener("DOMContentLoaded", () => {
   if (cartCountEl && cartTotalEl) {
       const menuItems = document.querySelectorAll('.menu-list li');
       menuItems.forEach(item => {
-          // Find the elements inside the list item
           const nameEl = item.querySelector('span:first-child');
           const priceEl = item.querySelector('.price');
           
@@ -114,14 +92,11 @@ document.addEventListener("DOMContentLoaded", () => {
           const price = parseInt(priceText, 10);
           
           if (isNaN(price)) return;
-
-          // Initialize this item's quantity to 0
           itemQuantities[itemName] = 0;
 
-          // Create the + / - quantity controls (hidden by default)
           const qtyControl = document.createElement('div');
           qtyControl.className = 'qty-control';
-          qtyControl.style.display = 'none'; // Hidden until item is added to cart
+          qtyControl.style.display = 'none'; 
 
           const minusBtn = document.createElement('button');
           minusBtn.className = 'qty-btn';
@@ -139,12 +114,10 @@ document.addEventListener("DOMContentLoaded", () => {
           qtyControl.appendChild(qtyText);
           qtyControl.appendChild(plusBtn);
 
-          // Append it to the list item
+
           item.appendChild(qtyControl);
 
-          // Main click handler: adding the item for the first time
           item.addEventListener('click', (e) => {
-              // If user clicks on the + or - buttons, ignore this handler
               if (e.target.closest('.qty-control')) return;
 
               if (itemQuantities[itemName] === 0) {
@@ -153,22 +126,19 @@ document.addEventListener("DOMContentLoaded", () => {
                   cartTotal += price;
                   updateCartUI();
 
-                  // Show the controls and update the number
                   qtyText.textContent = itemQuantities[itemName];
                   qtyControl.style.display = 'flex';
 
-                  // Brief visual flash effect to show it was added to cart
                   const originalBg = item.style.backgroundColor;
-                  item.style.backgroundColor = 'rgba(122, 202, 181, 0.4)'; // green tint
+                  item.style.backgroundColor = 'rgba(122, 202, 181, 0.4)';
                   setTimeout(() => {
                       item.style.backgroundColor = originalBg;
                   }, 300);
               }
           });
 
-          // Plus button handler
           plusBtn.addEventListener('click', (e) => {
-              e.stopPropagation(); // Prevent the main list item from clicking
+              e.stopPropagation(); 
               itemQuantities[itemName]++;
               cartCount++;
               cartTotal += price;
@@ -176,16 +146,14 @@ document.addEventListener("DOMContentLoaded", () => {
               updateCartUI();
           });
 
-          // Minus button handler
           minusBtn.addEventListener('click', (e) => {
-              e.stopPropagation(); // Prevent the main list item from clicking
+              e.stopPropagation();
               if (itemQuantities[itemName] > 0) {
                   itemQuantities[itemName]--;
                   cartCount--;
                   cartTotal -= price;
                   
                   if (itemQuantities[itemName] === 0) {
-                      // Completely removed from cart, so hide the controls
                       qtyControl.style.display = 'none';
                   } else {
                       qtyText.textContent = itemQuantities[itemName];
@@ -195,14 +163,8 @@ document.addEventListener("DOMContentLoaded", () => {
           });
       });
   }
-
-
-  // ==========================================
-  // PLAYZONE PAGE FEATURES (Used on Playzone.html)
-  // ==========================================
-
+  // PLAYZONE PAGE FEATURES 
   // --- FEATURE 5: Find the Treat Game ---
-  // Game logic for the cups on the Playzone page
   const container = document.getElementById("cups-container");
   const msg = document.getElementById("game-message");
   const restartBtn = document.getElementById("restart-btn");
@@ -239,14 +201,8 @@ document.addEventListener("DOMContentLoaded", () => {
         container.appendChild(cup);
       }
     }
-
-    // Start the first game
   }
-
-  // ==========================================
   // CONTACT PAGE FEATURES (Used primarily on contact2.html)
-  // ==========================================
-
   /* ── Mode Toggle ── */
   const toggle = document.getElementById('modeToggle');
   const lblH   = document.getElementById('lbl-human');
@@ -284,16 +240,14 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
-  
-  /* ── Seat Pills ── */
+
   document.querySelectorAll('.seat-pill').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.seat-pill').forEach(b => b.classList.remove('sel'));
       btn.classList.add('sel');
     });
   });
-  
-  /* ── Birthday Toggle ── */
+
   const bdayToggle = document.getElementById('bdayToggle');
   let isBday = false;
   if (bdayToggle) {
@@ -303,8 +257,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (isBday) launchConfetti();
     });
   }
-  
-  /* ── Book Button ── */
+
   const bookBtn = document.getElementById('bookBtn');
   if (bookBtn) {
     bookBtn.addEventListener('click', function(e) {
@@ -345,8 +298,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (e.target === this) closeModal();
     });
   }
-  
-  /* ── Send Message ── */
+
   const sendBtn = document.getElementById('sendBtn');
   if (sendBtn) {
     sendBtn.addEventListener('click', () => {
@@ -366,8 +318,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
-  
-  /* ── Confetti ── */
+
   function launchConfetti() {
     const canvas = document.getElementById('confetti-canvas');
     if (!canvas) return;
