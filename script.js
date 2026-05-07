@@ -451,7 +451,8 @@ function submitReview() {
     <span class="review-tag">✨ New Review</span>
   `;
 
-  document.getElementById('reviewsTrack').insertBefore(card, reviewsTrack.firstChild);
+  const reviewsTrack = document.getElementById('reviewsTrack');
+reviewsTrack.insertBefore(card, reviewsTrack.firstChild);
   closeReviewModal();
 
   document.getElementById('review-name').value = '';
