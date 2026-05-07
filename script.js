@@ -390,4 +390,47 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     requestAnimationFrame(draw);
   }
+ let sel = 0;
+const rStars = document.querySelectorAll('#starPicker span');
+
+function openReviewModal()  { document.getElementById('reviewModalBackdrop').classList.add('open'); }
+function closeReviewModal() { document.getElementById('reviewModalBackdrop').classList.remove('open'); }
+
+rStars.forEach(s => {
+  s.addEventListener('click',      () => { sel = +s.dataset.val; highlight(sel); });
+  s.addEventListener('mouseenter', () => highlight(+s.dataset.val));
+  s.addEventListener('mouseleave', () => highlight(sel));
+});
+function highlight(n) { rStars.forEach((s,i) => s.classList.toggle('lit', i < n)); }
+
+function submitReview() {
+  const name = document.getElementById('review-name').value.trim();
+  const pet  = document.getElementById('review-pet').value.trim();
+  const text = document.getElementById('review-text').value.trim();
+  if (!name || !text || !sel) return alert('Please fill name, stars and review!');
+
+  const palettes = [['var(--pink-mid)','#fff'],['var(--green)','var(--dark)'],['var(--dark)','#fff'],['var(--pink-gradient-dark)','#fff']];
+  const [bg, color] = palettes[Math.floor(Math.random() * palettes.length)];
+
+  const card = document.createElement('div');
+  card.className = 'review-card';
+  card.innerHTML = `
+    <div class="review-top">
+      <div class="reviewer-avatar" style="background:${bg};color:${color};">${name[0].toUpperCase()}</div>
+      <div><p class="reviewer-name">${name}</p><p class="reviewer-pet">${pet || 'Solo visitor'}</p></div>
+    </div>
+    <div class="review-stars">${'★'.repeat(sel)}${'☆'.repeat(5-sel)}</div>
+    <p class="review-text">${text}</p>
+    <span class="review-tag">✨ New</span>`;
+
+  document.getElementById('reviewsTrack').prepend(card);
+  closeReviewModal();
+  ['review-name','review-pet','review-text'].forEach(id => document.getElementById(id).value = '');
+  sel = 0; highlight(0);
+  alert('Thanks for your review, ' + name + '! 🐾');
+}
+
+document.getElementById('reviewModalBackdrop').addEventListener('click', function(e) {
+  if (e.target === this) closeReviewModal();
+});
 });
