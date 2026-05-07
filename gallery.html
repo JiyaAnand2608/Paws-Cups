@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery | Paws &amp; Cups</title>
+  <meta name="description"
+    content="Browse our guest photo gallery at Paws & Cups — meet Oscar, our star priority guest, and all the adorable furry visitors.">
+  <link rel="stylesheet" href="style2.css">
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="index2.html" class="logo-area" style="text-decoration:none;">
+      <img src="images/logo.png" class="logo" alt="Paws &amp; Cups Logo" onerror="this.src='paw-cofee.jpeg'">
+      <span class="cafe-name">Paws <span class="and-sign">&amp;</span> Cups</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index2.html">Home</a></li>
+      <li><a href="about2.html">Story</a></li>
+      <li><a href="menu2.html">Menu</a></li>
+      <li><a href="gallery.html" class="active-link">Gallery</a></li>
+      <li><a href="contact2.html">Book a Table</a></li>
+    </ul>
+    <span class="menu-icon" id="menuIcon"
+      onclick="document.getElementById('navLinks').classList.toggle('active')">&#9776;</span>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <header class="gallery-page-hero">
+    <div class="gallery-hero-content">
+      <span class="section-tag">📸 Our Guests</span>
+      <h1>The Gallery</h1>
+      <p>Moments of joy, fur &amp; coffee — captured forever.</p>
+    </div>
+  </header>
+
+  <!-- ── OSCAR SPOTLIGHT ── -->
+  <section class="oscar-spotlight">
+    <div class="oscar-spotlight-inner">
+
+      <div class="oscar-badge-row">
+        <span class="oscar-priority-badge">⭐ Priority Guest</span>
+      </div>
+
+      <div class="oscar-main-grid">
+        <!-- Main photo -->
+        <div class="oscar-photo-wrap">
+          <div class="oscar-crown-emoji">👑</div>
+          <img src="images/oscar.jpeg" alt="Oscar — Star of Paws &amp; Cups" class="oscar-main-photo"
+            onerror="this.src='paw-cofee.jpeg'">
+        </div>
+
+        <!-- Info -->
+        <div class="oscar-info">
+          <span class="section-tag" style="background:rgba(232,157,157,0.25);">Our Beloved Regular</span>
+          <h2 class="oscar-name">Meet Oscar</h2>
+          <p class="oscar-desc">
+            Oscar holds a very special place in the heart of Paws &amp; Cups.
+            As our most cherished and loyal guest, Oscar has a <strong>standing priority welcome</strong> —
+            whenever he walks through our doors, the whole café lights up.
+            His wagging tail, gentle eyes, and infectious energy are the very spirit of what we set out to create.
+          </p>
+          <div class="oscar-stats-row">
+            <div class="oscar-stat-pill">⭐ Priority Guest</div>
+            <div class="oscar-stat-pill">🐾 Fave Regular</div>
+            <div class="oscar-stat-pill">☕ Puppuccino Fan</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Oscar's strip -->
+      <h3 class="oscar-strip-title">Oscar's Moments</h3>
+      <div class="oscar-strip">
+        <div class="oscar-strip-thumb" data-src="images/oscar1.jpeg"><img src="images/oscar1.jpeg" alt="Oscar 1"
+            onerror="this.src='paw-cofee.jpeg'"></div>
+        <div class="oscar-strip-thumb" data-src="images/oscar2.jpeg"><img src="images/oscar2.jpeg" alt="Oscar 2"
+            onerror="this.src='paw-cofee.jpeg'"></div>
+        <div class="oscar-strip-thumb" data-src="images/oscar3.jpeg"><img src="images/oscar3.jpeg" alt="Oscar 3"
+            onerror="this.src='paw-cofee.jpeg'"></div>
+        <div class="oscar-strip-thumb" data-src="images/oscar4.jpeg"><img src="images/oscar4.jpeg" alt="Oscar 4"
+            onerror="this.src='paw-cofee.jpeg'"></div>
+        <div class="oscar-strip-thumb" data-src="images/oscar5.jpeg"><img src="images/oscar5.jpeg" alt="Oscar 5"
+            onerror="this.src='paw-cofee.jpeg'"></div>
+        <div class="oscar-strip-thumb" data-src="images/oscar6.jpeg"><img src="images/oscar6.jpeg" alt="Oscar 6"
+            onerror="this.src='paw-cofee.jpeg'"></div>
+        <div class="oscar-strip-thumb" data-src="images/oscar7.jpeg"><img src="images/oscar7.jpeg" alt="Oscar 7"
+            onerror="this.src='paw-cofee.jpeg'"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── UPLOAD YOUR PHOTO ── -->
+  <section class="upload-section">
+    <div class="upload-inner">
+      <span class="section-tag">📤 Share Your Visit</span>
+      <h2>Upload Your Moment</h2>
+      <p class="upload-sub">Visited us with your furry bestie? Share the memory and get featured in our gallery!</p>
+
+      <div class="upload-card" id="uploadCard">
+        <div class="upload-drop-zone" id="dropZone">
+          <div class="upload-icon">🐾</div>
+          <p class="upload-drop-text">Drag &amp; drop your photo here</p>
+          <p class="upload-drop-sub">or</p>
+          <label class="pink-btn upload-file-label" for="fileInput">Choose Photo</label>
+          <input type="file" id="fileInput" accept="image/*" style="display:none;">
+        </div>
+
+        <div class="upload-preview-wrap" id="uploadPreviewWrap" style="display:none;">
+          <img src="" alt="Preview" id="uploadPreview" class="upload-preview-img">
+          <button class="upload-remove-btn" id="removePreviewBtn" title="Remove">✕</button>
+        </div>
+
+        <div class="upload-form">
+          <div class="upload-form-row">
+            <div class="upload-field">
+              <label for="uploaderName">Your Name</label>
+              <input type="text" id="uploaderName" placeholder="e.g. Priya" maxlength="40">
+            </div>
+            <div class="upload-field">
+              <label for="petName">Pet's Name</label>
+              <input type="text" id="petName" placeholder="e.g. Bruno" maxlength="40">
+            </div>
+          </div>
+          <div class="upload-field">
+            <label for="uploadCaption">Caption (optional)</label>
+            <input type="text" id="uploadCaption" placeholder="e.g. Best puppuccino ever! 🐶" maxlength="80">
+          </div>
+          <button class="pink-btn upload-submit-btn" id="uploadSubmitBtn">Share to Gallery 🐾</button>
+          <p class="upload-note">Photos are added to the guest gallery below instantly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── GUEST GALLERY ── -->
+  <section class="guest-gallery-section">
+    <div class="guest-gallery-inner">
+      <span class="section-tag">Everyone's Welcome</span>
+      <h2 class="guest-gallery-title">Guest Gallery</h2>
+      <p class="guest-gallery-sub">Every visit tells a story. Click any photo to view it full-screen.</p>
+
+      <!-- Filters -->
+      <div class="gallery-filters" id="galleryFilters">
+        <button class="gal-filter-btn active-filter" data-filter="all">All Photos</button>
+        <button class="gal-filter-btn" data-filter="vibe">Café Vibes</button>
+        <button class="gal-filter-btn" data-filter="guests">Guest Moments</button>
+      </div>
+
+      <!-- Masonry Grid -->
+      <div class="gal-grid" id="galGrid">
+
+        <!-- Vibe photos -->
+        <div class="gal-item" data-cat="vibe">
+          <img src="images/vibe1.jpg" alt="Café Vibe 1" onerror="this.src='paw-cofee.jpeg'">
+          <div class="gal-overlay"><span>Cozy Corner</span></div>
+        </div>
+        <div class="gal-item" data-cat="vibe">
+          <img src="images/vibe2.jpg" alt="Café Vibe 2" onerror="this.src='paw-cofee.jpeg'">
+          <div class="gal-overlay"><span>Golden Hour</span></div>
+        </div>
+        <div class="gal-item" data-cat="vibe">
+          <img src="images/vibe3.jpg" alt="Café Vibe 3" onerror="this.src='paw-cofee.jpeg'">
+          <div class="gal-overlay"><span>Morning Brew</span></div>
+        </div>
+        <div class="gal-item" data-cat="vibe">
+          <img src="images/vibe4.jpg" alt="Café Vibe 4" onerror="this.src='paw-cofee.jpeg'">
+          <div class="gal-overlay"><span>The Atmosphere</span></div>
+        </div>
+        <div class="gal-item" data-cat="vibe">
+          <img src="images/vibe5.jpg" alt="Café Vibe 5" onerror="this.src='paw-cofee.jpeg'">
+          <div class="gal-overlay"><span>Weekend Vibes</span></div>
+        </div>
+
+        <!-- Guest photos -->
+        <div class="gal-item" data-cat="guests">
+          <img src="images/WhatsApp Image 2026-04-27 at 5.15.26 PM.jpeg" alt="Guest Visit"
+            onerror="this.src='paw-cofee.jpeg'">
+          <div class="gal-overlay"><span>Happy Guests</span></div>
+        </div>
+        <div class="gal-item" data-cat="guests">
+          <img src="images/WhatsApp Image 2026-04-27 at 5.15.27 PM.jpeg" alt="Guest Visit"
+            onerror="this.src='paw-cofee.jpeg'">
+          <div class="gal-overlay"><span>Furry Friends</span></div>
+        </div>
+        <div class="gal-item" data-cat="guests">
+          <img src="images/WhatsApp Image 2026-04-27 at 5.15.28 PM.jpeg" alt="Guest Visit"
+            onerror="this.src='paw-cofee.jpeg'">
+          <div class="gal-overlay"><span>Paw-some Day</span></div>
+        </div>
+        <div class="gal-item" data-cat="guests">
+          <img src="images/WhatsApp Image 2026-04-27 at 5.15.29 PM.jpeg" alt="Guest Visit"
+            onerror="this.src='paw-cofee.jpeg'">
+          <div class="gal-overlay"><span>Café Companions</span></div>
+        </div>
+        <div class="gal-item" data-cat="guests">
+          <img src="images/WhatsApp Image 2026-05-04 at 12.57.26 AM (1).jpeg" alt="Guest Visit"
+            onerror="this.src='paw-cofee.jpeg'">
+          <div class="gal-overlay"><span>Late Night Cuddles</span></div>
+        </div>
+        <div class="gal-item" data-cat="guests">
+          <img src="images/WhatsApp Image 2026-05-04 at 12.57.27 AM (1).jpeg" alt="Guest Visit"
+            onerror="this.src='paw-cofee.jpeg'">
+          <div class="gal-overlay"><span>Sweet Moments</span></div>
+        </div>
+
+      </div><!-- /gal-grid -->
+    </div>
+  </section>
+
+  <!-- ── LIGHTBOX ── -->
+  <div class="gal-lightbox" id="galLightbox">
+    <button class="lb-close" id="lbClose">✕</button>
+    <button class="lb-nav lb-prev" id="lbPrev">&#8592;</button>
+    <div class="lb-img-wrap">
+      <img src="" alt="" id="lbImg">
+      <div class="lb-caption" id="lbCaption"></div>
+    </div>
+    <button class="lb-nav lb-next" id="lbNext">&#8594;</button>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-middle">
+      <span class="cafe-name">Paws <span class="and-sign">&amp;</span> Cups</span>
+      <p>&copy; 2026 Paws &amp; Cups. All rights reserved.</p>
+      <div style="display:flex;gap:1.2rem;">
+        <a href="index2.html" style="color:rgba(255,255,255,0.7);text-decoration:none;font-size:.85rem;">Home</a>
+        <a href="about2.html" style="color:rgba(255,255,255,0.7);text-decoration:none;font-size:.85rem;">Story</a>
+        <a href="menu2.html" style="color:rgba(255,255,255,0.7);text-decoration:none;font-size:.85rem;">Menu</a>
+        <a href="gallery.html"
+          style="color:var(--pink-mid);text-decoration:none;font-size:.85rem;font-weight:700;">Gallery</a>
+        <a href="contact2.html" style="color:rgba(255,255,255,0.7);text-decoration:none;font-size:.85rem;">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script2.js"></script>
+  <script src="gallery.js"></script>
+</body>
+
+</html>
