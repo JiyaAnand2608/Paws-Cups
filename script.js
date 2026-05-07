@@ -201,11 +201,16 @@ document.addEventListener("DOMContentLoaded", () => {
   //       container.appendChild(cup);
   //     }
   //   }
-
- const cupsContainer = document.getElementById("cups-container");
+// ==========================================
+// PLAYZONE PAGE FEATURES (Used on Playzone.html)
+// ==========================================
+const cupsContainer = document.getElementById("cups-container");
 const gameMsg = document.getElementById("game-message");
+
 if (cupsContainer && gameMsg) {
+  // Function to initialize/reset the game
   initPlayzone();
+
   function initPlayzone() {
     cupsContainer.innerHTML = "";
     gameMsg.textContent = "Pick a cup to help Bruno find his treat!";
@@ -213,26 +218,28 @@ if (cupsContainer && gameMsg) {
     
     let winningIndex = Math.floor(Math.random() * 3);
     let gameOver = false;
+
     for (let i = 0; i < 3; i++) {
       const cup = document.createElement("div");
       cup.className = "cup";
-      cup.textContent = "☕";
+      cup.textContent = "☕"; // Default cup emoji
       
       cup.onclick = () => {
-        if (gameOver) return;
+        if (gameOver) return; // Prevent multiple clicks
         gameOver = true;
         
         if (i === winningIndex) {
-          cup.textContent = "🦴";
+          cup.textContent = "🦴"; // Bone found!
           cup.classList.add("win-animation");
           gameMsg.textContent = "Win a treat for your dog! 🦴";
           gameMsg.classList.add("win-text");
         } else {
-          cup.textContent = "❌";
+          cup.textContent = "❌"; // Empty cup
           gameMsg.textContent = "Better luck next time! 🐾";
           gameMsg.classList.add("lose-text");
         }
-        // Disable all cups after one choice
+
+        // Disable all cups after the choice is made
         document.querySelectorAll('.cup').forEach(c => {
           c.style.cursor = "default";
           if (!c.classList.contains("win-animation") && c.textContent !== "❌") {
@@ -240,10 +247,13 @@ if (cupsContainer && gameMsg) {
           }
         });
       };
+      
       cupsContainer.appendChild(cup);
     }
   }
 }
+
+
   // CONTACT PAGE FEATURES (Used primarily on contact2.html)
   /* ── Mode Toggle ── */
   const toggle = document.getElementById('modeToggle');
