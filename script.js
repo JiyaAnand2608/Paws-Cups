@@ -393,83 +393,48 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     requestAnimationFrame(draw);
   }
+
+  
+  // PLAYZONE PAGE FEATURES 
   const cupsContainer = document.getElementById("cups-container");
+  const gameMsg = document.getElementById("game-message");
 
-const gameMsg = document.getElementById("game-message");
+  if (cupsContainer && gameMsg) {
+    initPlayzone();
 
-const restartBtn = document.getElementById("restart-btn");
+    function initPlayzone() {
+      cupsContainer.innerHTML = "";
+      gameMsg.textContent = "Pick a cup to help Bruno find his treat!";
+      
+      let winningIndex = Math.floor(Math.random() * 3);
+      let gameOver = false;
 
-const bruno = document.getElementById("bruno");
+      for (let i = 0; i < 3; i++) {
+        const cup = document.createElement("div");
+        cup.className = "cup";
+        cup.textContent = "☕";
+        
+        cup.onclick = () => {
+          if (gameOver) return;
+          gameOver = true;
+          
+          if (i === winningIndex) {
+            cup.textContent = "🦴"; 
+            cup.classList.add("win-animation");
+            gameMsg.textContent =  "Hurray!Treat for your dog! 🦴";
+            gameMsg.classList.add("win-text");
+          } else {
 
-const winSound = document.getElementById("winSound");
+            cup.textContent = "❌";
+            gameMsg.textContent = "Better luck next time! 🐾";
+            gameMsg.classList.add("lose-text");
+          }
 
-const loseSound = document.getElementById("loseSound");
-
-restartBtn.onclick = initPlayzone;
-
-initPlayzone();
-
-function initPlayzone(){
-
-  cupsContainer.innerHTML = "";
-
-  gameMsg.textContent = "Pick a cup to help Bruno find his treat!";
-
-  gameMsg.classList.remove("win-text","lose-text");
-
-  let winningIndex = Math.floor(Math.random() * 3);
-
-  let gameOver = false;
-
-  for(let i = 0; i < 3; i++){
-
-    const cup = document.createElement("div");
-
-    cup.className = "cup";
-
-    cup.textContent = "☕";
-
-    cup.onclick = () => {
-
-      if(gameOver) return;
-
-      gameOver = true;
-
-      if(i === winningIndex){
-
-        cup.textContent = "🦴";
-
-        cup.classList.add("win-animation");
-
-        gameMsg.textContent = "🎉 Hurray! Bruno found the treat!";
-
-        gameMsg.classList.add("win-text");
-
-        // Bruno jump
-        bruno.classList.add("jump");
-
-        setTimeout(() => {
-          bruno.classList.remove("jump");
-        },700);
-
-        // happy bark sound
-        winSound.play();
-
+      
+        };
+        
+        cupsContainer.appendChild(cup);
       }
-
-      else{
-
-        cup.textContent = "❌";
-
-        gameMsg.textContent = "😢 Oops! Better luck next time!";
-
-        gameMsg.classList.add("lose-text");
-
-        // sad sound
-        loseSound.play();
-      }
-    };
-
-    cupsContainer.appendChild(cup);
+    }
   }
-}
+});
