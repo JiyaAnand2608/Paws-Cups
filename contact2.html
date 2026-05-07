@@ -170,6 +170,48 @@
  
   </div>
 </main>
+
+
+
+
+ <!-- REVIEWS -->
+<section class="reviews-section">
+  <span class="section-tag">Happy Visitors</span>
+  <h2>What Our Guests Are Saying 🐾</h2>
+  <p class="reviews-sub">Real stories from humans and their furry plus-ones</p>
+  <div class="reviews-track-wrap">
+    <div class="reviews-track" id="reviewsTrack">
+      <div class="review-card"><div class="review-top"><div class="reviewer-avatar" style="background:var(--pink-mid);">A</div><div><p class="reviewer-name">Avni Sharma</p><p class="reviewer-pet">with Bruno 🐶 Golden Retriever</p></div></div><div class="review-stars">★★★★★</div><p class="review-text">Bruno loved the Pup Puccino! Best window seat ever. Coming back every weekend.</p><span class="review-tag">☕ Regular</span></div>
+      <div class="review-card"><div class="review-top"><div class="reviewer-avatar" style="background:var(--green);color:var(--dark);">R</div><div><p class="reviewer-name">Rahul Mehta</p><p class="reviewer-pet">with Mochi 🐱 Persian Cat</p></div></div><div class="review-stars">★★★★★</div><p class="review-text">Mochi warmed up instantly. Cold brew is exceptional and the vibe is unmatched.</p><span class="review-tag">🆕 First Visit</span></div>
+      <div class="review-card"><div class="review-top"><div class="reviewer-avatar" style="background:var(--pink-main);color:var(--dark);">P</div><div><p class="reviewer-name">Priya Nair</p><p class="reviewer-pet">with Oreo 🐶 Beagle</p></div></div><div class="review-stars">★★★★☆</div><p class="review-text">Cozy patio, great latte. The pet birthday celebration is such a cute touch!</p><span class="review-tag">🎂 Birthday Visit</span></div>
+      <div class="review-card"><div class="review-top"><div class="reviewer-avatar" style="background:var(--dark);">K</div><div><p class="reviewer-name">Karan Bhatia</p><p class="reviewer-pet">with Noodles 🐶 Shih Tzu</p></div></div><div class="review-stars">★★★★★</div><p class="review-text">Staff remembered Noodles from last month. Best pet café in Punjab, hands down.</p><span class="review-tag">☕ Regular</span></div>
+      <div class="review-card"><div class="review-top"><div class="reviewer-avatar" style="background:var(--pink-gradient-dark);">S</div><div><p class="reviewer-name">Simran Kaur</p><p class="reviewer-pet">with Butter 🐱 Tabby Cat</p></div></div><div class="review-stars">★★★★★</div><p class="review-text">Quiet corner was perfect for anxious Butter. She fell asleep! 10/10 daily.</p><span class="review-tag">🌿 Calm Vibes</span></div>
+      <div class="review-card"><div class="review-top"><div class="reviewer-avatar" style="background:var(--pink-main);color:var(--dark);">D</div><div><p class="reviewer-name">Dev Anand</p><p class="reviewer-pet">with Max 🐶 Labrador</p></div></div><div class="review-stars">★★★★☆</div><p class="review-text">Max made friends while I worked. Great WiFi, great coffee — perfect combo.</p><span class="review-tag">💻 Work & Paws</span></div>
+    </div>
+  </div>
+  <div class="write-review-wrap">
+    <p>Had a great time? We'd love to hear about it!</p>
+    <button class="pink-btn" onclick="openReviewModal()">✍️ Write a Review</button>
+  </div>
+</section>
+
+<!-- Review Modal -->
+<div class="review-modal-backdrop" id="reviewModalBackdrop">
+  <div class="review-modal">
+    <h3>Share Your Experience 🐾</h3>
+    <p class="modal-sub">We read every review!</p>
+    <div class="star-picker" id="starPicker">
+      <span data-val="1">⭐</span><span data-val="2">⭐</span><span data-val="3">⭐</span><span data-val="4">⭐</span><span data-val="5">⭐</span>
+    </div>
+    <div class="field"><label>Your Name</label><input type="text" id="review-name" placeholder="e.g. Avni"></div>
+    <div class="field"><label>Pet's Name & Breed</label><input type="text" id="review-pet" placeholder="e.g. Bruno · Golden Retriever"></div>
+    <div class="field"><label>Your Review</label><textarea id="review-text" placeholder="What did you love?"></textarea></div>
+    <div class="modal-actions">
+      <button class="modal-cancel" onclick="closeReviewModal()">Cancel</button>
+      <button class="modal-submit" onclick="submitReview()">Post Review 🐾</button>
+    </div>
+  </div>
+</div>
  
 <!-- MODAL -->
 <div class="modal-backdrop" id="modalBackdrop">
