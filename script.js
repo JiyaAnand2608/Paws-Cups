@@ -167,10 +167,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- FEATURE 5: Find the Treat Game ---
   const container = document.getElementById("cups-container");
   const msg = document.getElementById("game-message");
-  const restartBtn = document.getElementById("restart-btn");
+
   
-  // if (container && msg && restartBtn) {
-    restartBtn.onclick = initGame;
+  if (container && msg ) {
+   
 
     function initGame() {
       container.innerHTML = "";
