@@ -174,6 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function initPlayzone() {
       cupsContainer.innerHTML = "";
       gameMsg.textContent = "Pick a cup to help Bruno find his treat!";
+      gameMsg.className = "game-message";
      
       let winningIndex = Math.floor(Math.random() * 3);
       let gameOver = false;
@@ -198,7 +199,7 @@ document.addEventListener("DOMContentLoaded", () => {
           }
 
         
-};
+        };
         
         cupsContainer.appendChild(cup);
       }
