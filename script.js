@@ -165,104 +165,16 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   // PLAYZONE PAGE FEATURES 
   // --- FEATURE 5: Find the Treat Game ---
-  // const container = document.getElementById("cups-container");
-  // const msg = document.getElementById("game-message");
-  // const restartBtn = document.getElementById("restart-btn");
+  const container = document.getElementById("cups-container");
+  const msg = document.getElementById("game-message");
+  const restartBtn = document.getElementById("restart-btn");
   
-  // // if (container && msg && restartBtn) {
-  //   restartBtn.onclick = initGame;
+  // if (container && msg && restartBtn) {
+    restartBtn.onclick = initGame;
 
-  //   function initGame() {
-  //     container.innerHTML = "";
-  //     msg.textContent = "Pick a cup to start!";
-      
-  //     let winningIndex = Math.floor(Math.random() * 3);
-  //     let gameOver = false;
-
-  //     for (let i = 0; i < 3; i++) {
-  //       const cup = document.createElement("div");
-  //       cup.className = "cup";
-  //       cup.textContent = "☕";
-        
-  //       cup.onclick = () => {
-  //         if (gameOver) return;
-  //         gameOver = true;
-          
-  //         if (i === winningIndex) {
-  //             cup.textContent = "🦴";
-  //             cup.classList.add("win-animation");
-  //             msg.textContent = "Yay! Bruno found the treat 🐾";
-  //         } else {
-  //             cup.textContent = "❌";
-  //             msg.textContent = "Oops, empty!";
-  //         }
-  //       };
-        
-  //       container.appendChild(cup);
-  //     }
-  //   }
-// ==========================================
-// PLAYZONE PAGE FEATURES (Used on Playzone.html)
-// ==========================================
-// const cupsContainer = document.getElementById("cups-container");
-// const gameMsg = document.getElementById("game-message");
-
-// if (cupsContainer && gameMsg) {
-//   // Function to initialize/reset the game
-//   initPlayzone();
-
-//   function initPlayzone() {
-//     cupsContainer.innerHTML = "";
-//     gameMsg.textContent = "Pick a cup to help Bruno find his treat!";
-//     gameMsg.style.color = "var(--dark)";
-    
-//     let winningIndex = Math.floor(Math.random() * 3);
-//     let gameOver = false;
-
-//     for (let i = 0; i < 3; i++) {
-//       const cup = document.createElement("div");
-//       cup.className = "cup";
-//       cup.textContent = "☕"; // Default cup emoji
-      
-//       cup.onclick = () => {
-//         if (gameOver) return; // Prevent multiple clicks
-//         gameOver = true;
-        
-//         if (i === winningIndex) {
-//           cup.textContent = "🦴"; // Bone found!
-//           cup.classList.add("win-animation");
-//           gameMsg.textContent = "Win a treat for your dog! 🦴";
-//           gameMsg.classList.add("win-text");
-//         } else {
-//           cup.textContent = "❌"; // Empty cup
-//           gameMsg.textContent = "Better luck next time! 🐾";
-//           gameMsg.classList.add("lose-text");
-//         }
-
-//         // Disable all cups after the choice is made
-//         document.querySelectorAll('.cup').forEach(c => {
-//           c.style.cursor = "default";
-//           if (!c.classList.contains("win-animation") && c.textContent !== "❌") {
-//             c.style.opacity = "0.5";
-//           }
-//         });
-//       };
-      
-//       cupsContainer.appendChild(cup);
-//     }
-//   }
-// }
-/* --- UPDATED JS in script.js --- */
- const cupsContainer = document.getElementById("cups-container");
-  const gameMsg = document.getElementById("game-message");
-
-  if (cupsContainer && gameMsg) {
-    initPlayzone();
-
-    function initPlayzone() {
-      cupsContainer.innerHTML = "";
-      gameMsg.textContent = "Pick a cup to help Bruno find his treat!";
-      gameMsg.style.color = "var(--dark)";
+    function initGame() {
+      container.innerHTML = "";
+      msg.textContent = "Pick a cup to start!";
       
       let winningIndex = Math.floor(Math.random() * 3);
       let gameOver = false;
@@ -270,37 +182,25 @@ document.addEventListener("DOMContentLoaded", () => {
       for (let i = 0; i < 3; i++) {
         const cup = document.createElement("div");
         cup.className = "cup";
-        cup.textContent = "🍵"; // Using a nicer cup emoji
+        cup.textContent = "☕";
         
         cup.onclick = () => {
           if (gameOver) return;
           gameOver = true;
           
           if (i === winningIndex) {
-            cup.textContent = "🦴"; // Bone
-            cup.classList.add("win-animation");
-            gameMsg.textContent = "Win a treat for your dog! 🦴";
-            gameMsg.classList.add("win-text");
+              cup.textContent = "🦴";
+              cup.classList.add("win-animation");
+              msg.textContent = "Yay! Bruno found the treat 🐾";
           } else {
-            cup.textContent = "❌";
-            gameMsg.textContent = "Better luck next time! 🐾";
-            gameMsg.classList.add("lose-text");
+              cup.textContent = "❌";
+              msg.textContent = "Better luck next time!🐾";
           }
-
-          // Disable all cups
-          document.querySelectorAll('.cup').forEach(c => {
-            c.style.cursor = "default";
-            if (!c.classList.contains("win-animation") && c.textContent !== "❌") {
-              c.style.opacity = "0.5";
-            }
-          });
         };
         
-        cupsContainer.appendChild(cup);
+        container.appendChild(cup);
       }
     }
-  }
-});
 
 
 
