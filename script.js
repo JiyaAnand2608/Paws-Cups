@@ -182,7 +182,7 @@ document.addEventListener("DOMContentLoaded", () => {
       for (let i = 0; i < 3; i++) {
         const cup = document.createElement("div");
         cup.className = "cup";
-        cup.textContent = "🍵"; 
+        cup.textContent = "☕"; 
         cup.onclick = () => {
           if (gameOver) return;
           gameOver = true;
