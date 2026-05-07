@@ -390,152 +390,167 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     requestAnimationFrame(draw);
   }
- // ── REVIEW MODAL ──
+
 let selectedStars = 0;
 
-document.addEventListener('DOMContentLoaded', () => {
+// Open modal
+function openReviewModal() {
+  document
+    .getElementById('reviewModalBackdrop')
+    .classList.add('open');
+}
 
-  // Open modal
-  function openReviewModal() {
-    document.getElementById('reviewModalBackdrop').classList.add('open');
-  }
+// Close modal
+function closeReviewModal() {
+  document
+    .getElementById('reviewModalBackdrop')
+    .classList.remove('open');
+}
 
-  // Close modal
-  function closeReviewModal() {
-    document.getElementById('reviewModalBackdrop').classList.remove('open');
-  }
+// Stars
+const reviewStars = document.querySelectorAll('#starPicker span');
 
-  // Make functions accessible from HTML
-  window.openReviewModal = openReviewModal;
-  window.closeReviewModal = closeReviewModal;
+reviewStars.forEach(star => {
 
-  // Star picker
-  const reviewStars = document.querySelectorAll('#starPicker span');
+  star.addEventListener('click', () => {
 
-  reviewStars.forEach(star => {
+    selectedStars = parseInt(star.dataset.val);
 
-    // Click stars
-    star.addEventListener('click', () => {
-      selectedStars = parseInt(star.dataset.val);
-
-      reviewStars.forEach((s, i) => {
-        s.classList.toggle('lit', i < selectedStars);
-      });
-    });
-
-    // Hover stars
-    star.addEventListener('mouseenter', () => {
-      const val = parseInt(star.dataset.val);
-
-      reviewStars.forEach((s, i) => {
-        s.classList.toggle('lit', i < val);
-      });
-    });
-
-    // Remove hover effect
-    star.addEventListener('mouseleave', () => {
-      reviewStars.forEach((s, i) => {
-        s.classList.toggle('lit', i < selectedStars);
-      });
+    reviewStars.forEach((s, i) => {
+      s.classList.toggle('lit', i < selectedStars);
     });
 
   });
 
-  // Submit review
-  function submitReview() {
+  star.addEventListener('mouseenter', () => {
 
-    const name = document.getElementById('review-name').value.trim();
-    const pet  = document.getElementById('review-pet').value.trim();
-    const text = document.getElementById('review-text').value.trim();
+    const val = parseInt(star.dataset.val);
 
-    // Validation
-    if (!name || !text || selectedStars === 0) {
-      alert('Please fill in your name, rating, and review before posting!');
-      return;
-    }
-
-    // Create star string
-    const starStr =
-      '★'.repeat(selectedStars) +
-      '☆'.repeat(5 - selectedStars);
-
-    // Random avatar colors
-    const colorPairs = [
-      { bg: 'var(--pink-mid)',           color: '#fff' },
-      { bg: 'var(--green)',              color: 'var(--dark)' },
-      { bg: 'var(--pink-main)',          color: 'var(--dark)' },
-      { bg: 'var(--dark)',               color: '#fff' },
-      { bg: 'var(--pink-gradient-dark)', color: '#fff' },
-    ];
-
-    const pair = colorPairs[Math.floor(Math.random() * colorPairs.length)];
-
-    // User initial
-    const initial = name.charAt(0).toUpperCase();
-
-    // Create review card
-    const card = document.createElement('div');
-    card.className = 'review-card';
-
-    card.innerHTML = `
-      <div class="review-top">
-        <div class="reviewer-avatar"
-             style="background:${pair.bg}; color:${pair.color};">
-          ${initial}
-        </div>
-
-        <div class="reviewer-info">
-          <p class="reviewer-name">${name}</p>
-          <p class="reviewer-pet">
-            ${pet ? 'with ' + pet : 'Solo visitor'}
-          </p>
-        </div>
-      </div>
-
-      <div class="review-stars">${starStr}</div>
-
-      <p class="review-text">${text}</p>
-
-      <span class="review-tag">✨ New Review</span>
-    `;
-
-    // Get reviews container
-    const reviewsTrack = document.getElementById('reviewsTrack');
-
-    // Add review at top
-    reviewsTrack.insertBefore(card, reviewsTrack.firstChild);
-
-    // Close modal
-    closeReviewModal();
-
-    // Reset fields
-    document.getElementById('review-name').value = '';
-    document.getElementById('review-pet').value  = '';
-    document.getElementById('review-text').value = '';
-
-    // Reset stars
-    selectedStars = 0;
-
-    reviewStars.forEach(s => {
-      s.classList.remove('lit');
+    reviewStars.forEach((s, i) => {
+      s.classList.toggle('lit', i < val);
     });
 
-    // Success alert
-    alert('Thank you for your review, ' + name + '! 🐾');
-  }
+  });
 
-  // Make submit function accessible from HTML
-  window.submitReview = submitReview;
+  star.addEventListener('mouseleave', () => {
 
-  // Close modal when clicking backdrop
-  document
-    .getElementById('reviewModalBackdrop')
-    .addEventListener('click', function(e) {
-
-      if (e.target === this) {
-        closeReviewModal();
-      }
-
+    reviewStars.forEach((s, i) => {
+      s.classList.toggle('lit', i < selectedStars);
     });
+
+  });
 
 });
+
+// Submit review
+function submitReview() {
+
+  const name =
+    document.getElementById('review-name').value.trim();
+
+  const pet =
+    document.getElementById('review-pet').value.trim();
+
+  const text =
+    document.getElementById('review-text').value.trim();
+
+  // Validation
+  if (!name || !text || selectedStars === 0) {
+
+    alert(
+      'Please fill in your name, rating, and review before posting!'
+    );
+
+    return;
+  }
+
+  // Stars string
+  const starStr =
+    '★'.repeat(selectedStars) +
+    '☆'.repeat(5 - selectedStars);
+
+  // Avatar colors
+  const colorPairs = [
+    { bg: 'var(--pink-mid)', color: '#fff' },
+    { bg: 'var(--green)', color: 'var(--dark)' },
+    { bg: 'var(--pink-main)', color: 'var(--dark)' },
+    { bg: 'var(--dark)', color: '#fff' },
+    { bg: 'var(--pink-gradient-dark)', color: '#fff' },
+  ];
+
+  const pair =
+    colorPairs[Math.floor(Math.random() * colorPairs.length)];
+
+  // Initial
+  const initial =
+    name.charAt(0).toUpperCase();
+
+  // Create card
+  const card = document.createElement('div');
+
+  card.className = 'review-card';
+
+  card.innerHTML = `
+    <div class="review-top">
+
+      <div class="reviewer-avatar"
+        style="background:${pair.bg}; color:${pair.color};">
+        ${initial}
+      </div>
+
+      <div class="reviewer-info">
+        <p class="reviewer-name">${name}</p>
+
+        <p class="reviewer-pet">
+          ${pet ? 'with ' + pet : 'Solo visitor'}
+        </p>
+      </div>
+
+    </div>
+
+    <div class="review-stars">${starStr}</div>
+
+    <p class="review-text">${text}</p>
+
+    <span class="review-tag">✨ New Review</span>
+  `;
+
+  // Insert review
+  const reviewsTrack =
+    document.getElementById('reviewsTrack');
+
+  reviewsTrack.insertBefore(
+    card,
+    reviewsTrack.firstChild
+  );
+
+  // Close modal
+  closeReviewModal();
+
+  // Reset form
+  document.getElementById('review-name').value = '';
+
+  document.getElementById('review-pet').value = '';
+
+  document.getElementById('review-text').value = '';
+
+  selectedStars = 0;
+
+  reviewStars.forEach(s => {
+    s.classList.remove('lit');
+  });
+
+  // Success
+  alert('Thank you for your review, ' + name + '! 🐾');
+}
+
+// Click outside modal to close
+document
+  .getElementById('reviewModalBackdrop')
+  .addEventListener('click', function(e) {
+
+    if (e.target === this) {
+      closeReviewModal();
+    }
+
+  });
