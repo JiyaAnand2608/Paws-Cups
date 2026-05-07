@@ -1,38 +1,79 @@
-body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  background-color: #ffeef2; /* matching cafe theme */
-  color: #333;
-  padding-top: 10%;
+.game-container {
+  background: #FFFBF5 !important;
+  max-width: 700px !important;
+  margin: 60px auto !important;
+  padding: 60px 40px !important;
+  border-radius: 40px !important;
+  box-shadow: 0 20px 60px rgba(60, 42, 33, 0.1) !important;
+  border: 1px solid rgba(232, 157, 157, 0.2) !important;
+  text-align: center !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
-h2 {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
+.game-container h2 {
+  font-family: var(--main-font);
+  font-size: clamp(2rem, 5vw, 3.2rem) !important;
+  margin-bottom: 20px !important;
+  color: #D68181 !important;
+  font-weight: 800 !important;
+}
+
+.game-container p {
+  color: #555 !important;
+  font-size: 1.1rem !important;
+  margin-bottom: 40px !important;
 }
 
 .cups-row {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  margin: 40px 0;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 30px !important;
+  margin: 30px 0 50px 0 !important;
+  width: 100% !important;
 }
 
 .cup {
-  font-size: 100px;
-  cursor: pointer;
-  transition: transform 0.2s;
-  user-select: none;
-}
-
-.cup:hover {
-  transform: translateY(-10px);
+  font-size: clamp(80px, 15vw, 110px) !important;
+  cursor: pointer !important;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  user-select: none !important;
 }
 
 .game-message {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 25px;
+  font-size: 1.8rem !important;
+  font-weight: 800 !important;
+  margin-bottom: 40px !important;
+  color: #3C2A21 !important;
 }
 
+.win-text { color: #D68181 !important; }
+.lose-text { color: #888 !important; }
+
+.win-animation {
+  animation: bounce 1s ease infinite alternate !important;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+  40% {transform: translateY(-30px);}
+  60% {transform: translateY(-15px);}
+}
+
+.back-link {
+  display: inline-block !important;
+  margin-top: 20px !important;
+  color: #E89D9D !important;
+  text-decoration: none !important;
+  font-weight: 700 !important;
+  font-size: 0.95rem !important;
+  transition: all 0.3s !important;
+}
+
+.back-link:hover {
+  color: #D68181 !important;
+  letter-spacing: 0.5px !important;
 }
