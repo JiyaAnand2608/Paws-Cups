@@ -451,8 +451,7 @@ function submitReview() {
     <span class="review-tag">✨ New Review</span>
   `;
 
-  const reviewsTrack = document.getElementById('reviewsTrack');
-reviewsTrack.insertBefore(card, reviewsTrack.firstChild);
+  document.getElementById('reviewsTrack').insertBefore(card, reviewsTrack.firstChild);
   closeReviewModal();
 
   document.getElementById('review-name').value = '';
@@ -466,4 +465,4 @@ reviewsTrack.insertBefore(card, reviewsTrack.firstChild);
 
 document.getElementById('reviewModalBackdrop').addEventListener('click', function(e) {
   if (e.target === this) closeReviewModal();
-});
+}); 
