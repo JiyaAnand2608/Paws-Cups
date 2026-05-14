@@ -7,37 +7,41 @@
   <title>Gallery | Paws &amp; Cups</title>
   <meta name="description"
     content="Browse our guest photo gallery at Paws & Cups — meet Oscar, our star priority guest, and all the adorable furry visitors.">
-  <link rel="stylesheet" href="style2.css">
+  <link rel="stylesheet" href="style2.css?v=3">
 </head>
 
 <body>
 
   <!-- NAVBAR -->
-  <nav class="navbar">
-    <a href="index2.html" class="logo-area" style="text-decoration:none;">
-      <img src="images/logo.png" class="logo" alt="Paws &amp; Cups Logo" onerror="this.src='paw-cofee.jpeg'">
-      <span class="cafe-name">Paws <span class="and-sign">&amp;</span> Cups</span>
-    </a>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about2.html">Story</a></li>
-      <li><a href="menu2.html">Menu</a></li>
-      <li><a href="contact2.html">Visit us</a></li>
-      <li><a href="gallery.html" class="active-link">Gallery</a></li>
-      
-    </ul>
-    <span class="menu-icon" id="menuIcon"
-      onclick="document.getElementById('navLinks').classList.toggle('active')">&#9776;</span>
-  </nav>
+  <header>
+    <nav class="navbar">
+      <div class="logo-area">
+        <img src="images/logo.png" class="logo" alt="Paws &amp; Cups Logo" onerror="this.src='paw-cofee.jpeg'">
+        <span class="cafe-name">Paws <span class="and-sign">&amp;</span> Cups</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about2.html">About</a></li>
+        <li><a href="Playzone.html">Playzone</a></li>
+        <li><a href="menu2.html">Menu</a></li>
+        <li><a href="contact2.html">Visit Us</a></li>
+        <li><a href="gallery.html" class="active-link">Gallery</a></li>
+      </ul>
+      <div class="menu-icon">☰</div>
+      <div class="cart-box">
+        🛒 <span id="cart-count">0</span> | <span id="cart-total">₹0</span>
+      </div>
+    </nav>
+  </header>
 
   <!-- PAGE HERO -->
-  <header class="gallery-page-hero">
+  <section class="gallery-page-hero">
     <div class="gallery-hero-content">
       <span class="section-tag">📸 Our Guests</span>
       <h1>The Gallery</h1>
       <p>Moments of joy, fur &amp; coffee — captured forever.</p>
     </div>
-  </header>
+  </section>
 
   <!-- ── OSCAR SPOTLIGHT ── -->
   <section class="oscar-spotlight">
@@ -52,7 +56,7 @@
         <div class="oscar-photo-wrap">
           <div class="oscar-crown-emoji">👑</div>
           <img src="images/oscar.jpeg" alt="Oscar — Star of Paws &amp; Cups" class="oscar-main-photo"
-            onerror="this.src='paw-cofee.jpeg'">
+            onerror="this.closest('.oscar-photo-wrap').style.display='none'">
         </div>
 
         <!-- Info -->
@@ -77,19 +81,19 @@
       <h3 class="oscar-strip-title">Oscar's Moments</h3>
       <div class="oscar-strip">
         <div class="oscar-strip-thumb" data-src="images/oscar1.jpeg"><img src="images/oscar1.jpeg" alt="Oscar 1"
-            onerror="this.src='paw-cofee.jpeg'"></div>
+            onerror="this.closest('.oscar-strip-thumb').style.display='none'"></div>
         <div class="oscar-strip-thumb" data-src="images/oscar2.jpeg"><img src="images/oscar2.jpeg" alt="Oscar 2"
-            onerror="this.src='paw-cofee.jpeg'"></div>
+            onerror="this.closest('.oscar-strip-thumb').style.display='none'"></div>
         <div class="oscar-strip-thumb" data-src="images/oscar3.jpeg"><img src="images/oscar3.jpeg" alt="Oscar 3"
-            onerror="this.src='paw-cofee.jpeg'"></div>
+            onerror="this.closest('.oscar-strip-thumb').style.display='none'"></div>
         <div class="oscar-strip-thumb" data-src="images/oscar4.jpeg"><img src="images/oscar4.jpeg" alt="Oscar 4"
-            onerror="this.src='paw-cofee.jpeg'"></div>
+            onerror="this.closest('.oscar-strip-thumb').style.display='none'"></div>
         <div class="oscar-strip-thumb" data-src="images/oscar5.jpeg"><img src="images/oscar5.jpeg" alt="Oscar 5"
-            onerror="this.src='paw-cofee.jpeg'"></div>
+            onerror="this.closest('.oscar-strip-thumb').style.display='none'"></div>
         <div class="oscar-strip-thumb" data-src="images/oscar6.jpeg"><img src="images/oscar6.jpeg" alt="Oscar 6"
-            onerror="this.src='paw-cofee.jpeg'"></div>
+            onerror="this.closest('.oscar-strip-thumb').style.display='none'"></div>
         <div class="oscar-strip-thumb" data-src="images/oscar7.jpeg"><img src="images/oscar7.jpeg" alt="Oscar 7"
-            onerror="this.src='paw-cofee.jpeg'"></div>
+            onerror="this.closest('.oscar-strip-thumb').style.display='none'"></div>
       </div>
     </div>
   </section>
@@ -156,55 +160,40 @@
 
         <!-- Vibe photos -->
         <div class="gal-item" data-cat="vibe">
-          <img src="images/vibe1.jpg" alt="Café Vibe 1" onerror="this.src='paw-cofee.jpeg'">
+          <img src="images/vibe1.jpg" alt="Café Vibe 1" onerror="this.closest('.gal-item').style.display='none'">
           <div class="gal-overlay"><span>Cozy Corner</span></div>
         </div>
         <div class="gal-item" data-cat="vibe">
-          <img src="images/vibe2.jpg" alt="Café Vibe 2" onerror="this.src='paw-cofee.jpeg'">
+          <img src="images/vibe2.jpg" alt="Café Vibe 2" onerror="this.closest('.gal-item').style.display='none'">
           <div class="gal-overlay"><span>Golden Hour</span></div>
         </div>
         <div class="gal-item" data-cat="vibe">
-          <img src="images/vibe3.jpg" alt="Café Vibe 3" onerror="this.src='paw-cofee.jpeg'">
+          <img src="images/vibe3.jpg" alt="Café Vibe 3" onerror="this.closest('.gal-item').style.display='none'">
           <div class="gal-overlay"><span>Morning Brew</span></div>
         </div>
         <div class="gal-item" data-cat="vibe">
-          <img src="images/vibe4.jpg" alt="Café Vibe 4" onerror="this.src='paw-cofee.jpeg'">
+          <img src="images/vibe4.jpg" alt="Café Vibe 4" onerror="this.closest('.gal-item').style.display='none'">
           <div class="gal-overlay"><span>The Atmosphere</span></div>
         </div>
         <div class="gal-item" data-cat="vibe">
-          <img src="images/vibe5.jpg" alt="Café Vibe 5" onerror="this.src='paw-cofee.jpeg'">
+          <img src="images/vibe5.jpg" alt="Café Vibe 5" onerror="this.closest('.gal-item').style.display='none'">
           <div class="gal-overlay"><span>Weekend Vibes</span></div>
         </div>
 
         <!-- Guest photos -->
         <div class="gal-item" data-cat="guests">
-          <img src="images/WhatsApp Image 2026-04-27 at 5.15.26 PM.jpeg" alt="Guest Visit"
-            onerror="this.src='paw-cofee.jpeg'">
-          <div class="gal-overlay"><span>Happy Guests</span></div>
-        </div>
-        <div class="gal-item" data-cat="guests">
           <img src="images/WhatsApp Image 2026-04-27 at 5.15.27 PM.jpeg" alt="Guest Visit"
-            onerror="this.src='paw-cofee.jpeg'">
+            onerror="this.closest('.gal-item').style.display='none'">
           <div class="gal-overlay"><span>Furry Friends</span></div>
         </div>
         <div class="gal-item" data-cat="guests">
           <img src="images/WhatsApp Image 2026-04-27 at 5.15.28 PM.jpeg" alt="Guest Visit"
-            onerror="this.src='paw-cofee.jpeg'">
+            onerror="this.closest('.gal-item').style.display='none'">
           <div class="gal-overlay"><span>Paw-some Day</span></div>
         </div>
         <div class="gal-item" data-cat="guests">
-          <img src="images/WhatsApp Image 2026-04-27 at 5.15.29 PM.jpeg" alt="Guest Visit"
-            onerror="this.src='paw-cofee.jpeg'">
-          <div class="gal-overlay"><span>Café Companions</span></div>
-        </div>
-        <div class="gal-item" data-cat="guests">
-          <img src="images/WhatsApp Image 2026-05-04 at 12.57.26 AM (1).jpeg" alt="Guest Visit"
-            onerror="this.src='paw-cofee.jpeg'">
-          <div class="gal-overlay"><span>Late Night Cuddles</span></div>
-        </div>
-        <div class="gal-item" data-cat="guests">
           <img src="images/WhatsApp Image 2026-05-04 at 12.57.27 AM (1).jpeg" alt="Guest Visit"
-            onerror="this.src='paw-cofee.jpeg'">
+            onerror="this.closest('.gal-item').style.display='none'">
           <div class="gal-overlay"><span>Sweet Moments</span></div>
         </div>
 
@@ -229,12 +218,11 @@
       <span class="cafe-name">Paws <span class="and-sign">&amp;</span> Cups</span>
       <p>&copy; 2026 Paws &amp; Cups. All rights reserved.</p>
       <div style="display:flex;gap:1.2rem;">
-        <a href="index2.html" style="color:rgba(255,255,255,0.7);text-decoration:none;font-size:.85rem;">Home</a>
-        <a href="about2.html" style="color:rgba(255,255,255,0.7);text-decoration:none;font-size:.85rem;">Story</a>
+        <a href="index.html" style="color:rgba(255,255,255,0.7);text-decoration:none;font-size:.85rem;">Home</a>
+        <a href="about2.html" style="color:rgba(255,255,255,0.7);text-decoration:none;font-size:.85rem;">About</a>
         <a href="menu2.html" style="color:rgba(255,255,255,0.7);text-decoration:none;font-size:.85rem;">Menu</a>
-        <a href="gallery.html"
-          style="color:var(--pink-mid);text-decoration:none;font-size:.85rem;font-weight:700;">Gallery</a>
-        <a href="contact2.html" style="color:rgba(255,255,255,0.7);text-decoration:none;font-size:.85rem;">Contact</a>
+        <a href="gallery.html" style="color:var(--pink-mid);text-decoration:none;font-size:.85rem;font-weight:700;">Gallery</a>
+        <a href="contact2.html" style="color:rgba(255,255,255,0.7);text-decoration:none;font-size:.85rem;">Visit Us</a>
       </div>
     </div>
   </footer>
