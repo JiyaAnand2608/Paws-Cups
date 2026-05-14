@@ -1,17 +1,17 @@
 // Ensure the DOM is fully loaded before running scripts
 document.addEventListener("DOMContentLoaded", () => {
-
+ 
   // ==========================================
-  // HOME PAGE FEATURES (Used primarily on index2.html)
+  // HOME PAGE FEATURES (Used primarily on index.html)
   // ==========================================
-
+ 
   // --- FEATURE 1: Dynamic Greeting ---
   // Checks the time of day and updates the <p id="status"> tag.
   const statusElement = document.getElementById("status");
   if (statusElement) {
     let hour = new Date().getHours();
     let greetingText = "";
-
+ 
     if (hour < 12) {
       greetingText = "Good Morning! Have a pawsome day! 🐾";
     } else if (hour < 18) {
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     statusElement.innerText = greetingText;
   }
-
+ 
   // --- FEATURE 2: Fun Secret Message ---
   // Changes the text of the small top tag when clicked.
   let topTag = document.querySelector(".top-tag");
@@ -30,12 +30,12 @@ document.addEventListener("DOMContentLoaded", () => {
       topTag.innerText = "Surprise! You just gave a virtual belly rub to a puppy! 🐶💕";
     };
   }
-
-
+ 
+ 
   // ==========================================
   // GLOBAL NAVBAR FEATURES (Used on ALL HTML pages)
   // ==========================================
-
+ 
   // --- Mobile Menu Toggle ---
   const menuIcon = document.querySelector('.menu-icon');
   const navLinks = document.querySelector('.nav-links');
@@ -45,15 +45,15 @@ document.addEventListener("DOMContentLoaded", () => {
           navLinks.classList.toggle('active');
       });
   }
-
+ 
   // ==========================================
   // MENU PAGE FEATURES (Used primarily on menu2.html)
   // ==========================================
-
+ 
   // --- Menu Search Filter ---
   const searchInput = document.getElementById('menuSearch');
   const menuCards = document.querySelectorAll('.menu-card');
-
+ 
   if (searchInput) {
       searchInput.addEventListener('input', function() {
           const filter = this.value.toLowerCase();
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
           menuCards.forEach(card => {
               const menuItems = card.querySelectorAll('.menu-list li');
               let cardMatches = false;
-
+ 
               menuItems.forEach(item => {
                   const itemName = item.querySelector('span:first-child').textContent.toLowerCase();
                   if (itemName.includes(filter)) {
@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
                       item.style.display = 'none';
                   }
               });
-
+ 
               if (cardMatches || filter === "") {
                   card.style.display = 'block'; // Show card if any item matches
                   if (filter === "") {
@@ -83,23 +83,23 @@ document.addEventListener("DOMContentLoaded", () => {
           });
       });
   }
-
+ 
   // --- Advanced Cart Functionality ---
   let cartTotal = 0;
   let cartCount = 0;
   const cartCountEl = document.getElementById('cart-count');
   const cartTotalEl = document.getElementById('cart-total');
-
+ 
   // Track quantities for each unique item
   const itemQuantities = {};
-
+ 
   function updateCartUI() {
       if (cartCountEl && cartTotalEl) {
           cartCountEl.textContent = cartCount;
           cartTotalEl.textContent = `₹${cartTotal}`;
       }
   }
-
+ 
   if (cartCountEl && cartTotalEl) {
       const menuItems = document.querySelectorAll('.menu-list li');
       menuItems.forEach(item => {
@@ -108,55 +108,55 @@ document.addEventListener("DOMContentLoaded", () => {
           const priceEl = item.querySelector('.price');
           
           if (!nameEl || !priceEl) return;
-
+ 
           const itemName = nameEl.textContent.trim();
           const priceText = priceEl.textContent.replace('₹', '').trim();
           const price = parseInt(priceText, 10);
           
           if (isNaN(price)) return;
-
+ 
           // Initialize this item's quantity to 0
           itemQuantities[itemName] = 0;
-
+ 
           // Create the + / - quantity controls (hidden by default)
           const qtyControl = document.createElement('div');
           qtyControl.className = 'qty-control';
           qtyControl.style.display = 'none'; // Hidden until item is added to cart
-
+ 
           const minusBtn = document.createElement('button');
           minusBtn.className = 'qty-btn';
           minusBtn.textContent = '-';
-
+ 
           const qtyText = document.createElement('span');
           qtyText.className = 'qty-text';
           qtyText.textContent = '1';
-
+ 
           const plusBtn = document.createElement('button');
           plusBtn.className = 'qty-btn';
           plusBtn.textContent = '+';
-
+ 
           qtyControl.appendChild(minusBtn);
           qtyControl.appendChild(qtyText);
           qtyControl.appendChild(plusBtn);
-
+ 
           // Append it to the list item
           item.appendChild(qtyControl);
-
+ 
           // Main click handler: adding the item for the first time
           item.addEventListener('click', (e) => {
               // If user clicks on the + or - buttons, ignore this handler
               if (e.target.closest('.qty-control')) return;
-
+ 
               if (itemQuantities[itemName] === 0) {
                   itemQuantities[itemName] = 1;
                   cartCount++;
                   cartTotal += price;
                   updateCartUI();
-
+ 
                   // Show the controls and update the number
                   qtyText.textContent = itemQuantities[itemName];
                   qtyControl.style.display = 'flex';
-
+ 
                   // Brief visual flash effect to show it was added to cart
                   const originalBg = item.style.backgroundColor;
                   item.style.backgroundColor = 'rgba(122, 202, 181, 0.4)'; // green tint
@@ -165,7 +165,7 @@ document.addEventListener("DOMContentLoaded", () => {
                   }, 300);
               }
           });
-
+ 
           // Plus button handler
           plusBtn.addEventListener('click', (e) => {
               e.stopPropagation(); // Prevent the main list item from clicking
@@ -175,7 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
               qtyText.textContent = itemQuantities[itemName];
               updateCartUI();
           });
-
+ 
           // Minus button handler
           minusBtn.addEventListener('click', (e) => {
               e.stopPropagation(); // Prevent the main list item from clicking
@@ -195,49 +195,12 @@ document.addEventListener("DOMContentLoaded", () => {
           });
       });
   }
-
-
+ 
+ 
   // ==========================================
   // CONTACT PAGE FEATURES (Used primarily on contact2.html)
   // ==========================================
-
-  /* ── Mode Toggle ── */
-  const toggle = document.getElementById('modeToggle');
-  const lblH   = document.getElementById('lbl-human');
-  const lblP   = document.getElementById('lbl-pet');
-  let petMode  = false;
-  
-  const swapMap = {
-    'eyebrow-text': ['Visit Us',           'Sniff Us Out'],
-    'hero-heading': ['Come Say Hello',     'Wag Your Way Here'],
-    'hero-sub':     ['We\'d love to meet you and your furry companion — reservations welcome.',
-                     'Treats, belly rubs & great coffee — reservations welcome.'],
-    'info-title':   ['Find Us',            'Paw Your Way To Us'],
-    'map-title':    ['Our Location',       'Follow the Paw Prints'],
-    'mapPinIcon':   ['☕',                 '🐾'],
-    'bookBtnText':  ['Confirm Reservation','Secure My Spot'],
-  };
-  
-  if (toggle) {
-    toggle.addEventListener('click', () => {
-      petMode = !petMode;
-      toggle.classList.toggle('active', petMode);
-      document.body.classList.toggle('pet-mode', petMode);
-      if (lblH) lblH.classList.toggle('on', !petMode);
-      if (lblP) lblP.classList.toggle('on', petMode);
-    
-      Object.entries(swapMap).forEach(([id, vals]) => {
-        const el = document.getElementById(id);
-        if (!el) return;
-        el.style.transition = 'opacity .25s';
-        el.style.opacity = '0';
-        setTimeout(() => {
-          el.textContent = vals[petMode ? 1 : 0];
-          el.style.opacity = '1';
-        }, 250);
-      });
-    });
-  }
+ 
   
   /* ── Seat Pills ── */
   document.querySelectorAll('.seat-pill').forEach(btn => {
@@ -275,7 +238,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const modalEmoji = document.getElementById('modalEmoji');
       const modalTitle = document.getElementById('modalTitle');
       const modalMsg = document.getElementById('modalMsg');
-
+ 
       if (modalEmoji) modalEmoji.textContent = isBday ? '🎂' : '🐾';
       if (modalTitle) modalTitle.textContent = isBday ? `Happy Birthday, ${pet}!` : 'Table Reserved!';
       if (modalMsg) modalMsg.textContent = isBday
@@ -287,12 +250,12 @@ document.addEventListener("DOMContentLoaded", () => {
       if (isBday) launchConfetti();
     });
   }
-
+ 
   window.closeModal = function() {
     const backdrop = document.getElementById('modalBackdrop');
     if (backdrop) backdrop.classList.remove('show');
   };
-
+ 
   const backdrop = document.getElementById('modalBackdrop');
   if (backdrop) {
     backdrop.addEventListener('click', function(e) {
@@ -300,28 +263,23 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
   
-  /* ── Send Message ── */
-  const sendBtn = document.getElementById('sendBtn');
-  if (sendBtn) {
-    sendBtn.addEventListener('click', () => {
-      const name  = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const st    = document.getElementById('status');
-      if (!name || !email) {
-        if (st) {
-          st.style.color = '#b03030';
-          st.textContent = 'Please fill in your name and email.';
-        }
-        return;
-      }
-      if (st) {
-        st.style.color = 'var(--green)';
-        st.textContent = `Thank you, ${name}. We'll be in touch soon.`;
-      }
+  /* ── Star Picker ── */
+  document.querySelectorAll('#starPicker span').forEach((star, idx, all) => {
+    star.style.cursor = 'pointer';
+    star.addEventListener('click', () => {
+      all.forEach((s, i) => s.classList.toggle('selected', i <= idx));
+    });
+  });
+
+  /* ── Review Backdrop close ── */
+  const reviewBackdrop = document.getElementById('reviewModalBackdrop');
+  if (reviewBackdrop) {
+    reviewBackdrop.addEventListener('click', function(e) {
+      if (e.target === this) closeReviewModal();
     });
   }
-  
-  /* ── Confetti ── */
+ 
+ 
   function launchConfetti() {
     const canvas = document.getElementById('confetti-canvas');
     if (!canvas) return;
@@ -393,22 +351,22 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     requestAnimationFrame(draw);
   }
-
+ 
   
   // PLAYZONE PAGE FEATURES 
   const cupsContainer = document.getElementById("cups-container");
   const gameMsg = document.getElementById("game-message");
-
+ 
   if (cupsContainer && gameMsg) {
     initPlayzone();
-
+ 
     function initPlayzone() {
       cupsContainer.innerHTML = "";
       gameMsg.textContent = "Pick a cup to help Bruno find his treat!";
       
       let winningIndex = Math.floor(Math.random() * 3);
       let gameOver = false;
-
+ 
       for (let i = 0; i < 3; i++) {
         const cup = document.createElement("div");
         cup.className = "cup";
@@ -424,12 +382,12 @@ document.addEventListener("DOMContentLoaded", () => {
             gameMsg.textContent =  "Hurray!Treat for your dog! 🦴";
             gameMsg.classList.add("win-text");
           } else {
-
+ 
             cup.textContent = "❌";
             gameMsg.textContent = "Better luck next time! 🐾";
             gameMsg.classList.add("lose-text");
           }
-
+ 
       
         };
         
@@ -438,3 +396,55 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 });
+
+// ── Review Modal Functions (global scope so inline onclick can reach them) ──
+
+function openReviewModal() {
+  const backdrop = document.getElementById('reviewModalBackdrop');
+  if (backdrop) backdrop.classList.add('show');
+}
+
+function closeReviewModal() {
+  const backdrop = document.getElementById('reviewModalBackdrop');
+  if (backdrop) backdrop.classList.remove('show');
+}
+
+function submitReview() {
+  const name  = document.getElementById('review-name')?.value.trim();
+  const pet   = document.getElementById('review-pet')?.value.trim();
+  const text  = document.getElementById('review-text')?.value.trim();
+  const stars = document.querySelectorAll('#starPicker span.selected').length;
+
+  if (!name || !text) {
+    alert('Please fill in your name and review before posting.');
+    return;
+  }
+
+  const starStr = '★'.repeat(stars || 5) + '☆'.repeat(5 - (stars || 5));
+  const track   = document.getElementById('reviewsTrack');
+  if (track) {
+    const card = document.createElement('div');
+    card.className = 'review-card';
+    card.innerHTML = `
+      <div class="review-top">
+        <div class="reviewer-avatar" style="background:var(--pink-mid);">${name[0].toUpperCase()}</div>
+        <div class="reviewer-info">
+          <p class="reviewer-name">${name}</p>
+          <p class="reviewer-pet">${pet ? 'with ' + pet : ''}</p>
+        </div>
+      </div>
+      <div class="review-stars">${starStr}</div>
+      <p class="review-text">${text}</p>
+      <span class="review-tag">🆕 New Visitor</span>
+    `;
+    track.insertBefore(card, track.firstChild);
+  }
+
+  closeReviewModal();
+
+  // Reset form
+  if (document.getElementById('review-name')) document.getElementById('review-name').value = '';
+  if (document.getElementById('review-pet'))  document.getElementById('review-pet').value  = '';
+  if (document.getElementById('review-text')) document.getElementById('review-text').value = '';
+  document.querySelectorAll('#starPicker span').forEach(s => s.classList.remove('selected'));
+}
