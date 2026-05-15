@@ -234,7 +234,7 @@ document.addEventListener("DOMContentLoaded", () => {
       btn.appendChild(r);
       setTimeout(() => r.remove(), 560);
     
-      const pet = document.getElementById('pet-name').value.trim() || 'your furry friend';
+      const pet = document.getElementById('pet-name')?.value.trim() || 'your furry friend';
       const modalEmoji = document.getElementById('modalEmoji');
       const modalTitle = document.getElementById('modalTitle');
       const modalMsg = document.getElementById('modalMsg');
