@@ -1,25 +1,16 @@
-/* ============================================================
-   gallery.js  —  Gallery page logic
-   Handles: filter, lightbox, drag-drop upload, photo preview
-   ============================================================ */
-
+/*gallery.js */
 document.addEventListener('DOMContentLoaded', () => {
-
-  /* ── 1. FILTER ─────────────────────────────────────────── */
   const filterBtns = document.querySelectorAll('.gal-filter-btn');
   const galItems   = document.querySelectorAll('.gal-item');
-
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       filterBtns.forEach(b => b.classList.remove('active-filter'));
       btn.classList.add('active-filter');
       const f = btn.dataset.filter;
-
       galItems.forEach(item => {
         const show = f === 'all' || item.dataset.cat === f;
         if (show) {
           item.style.display = 'block';
-          // tiny delay to allow display:block before opacity
           requestAnimationFrame(() => { item.style.opacity = '1'; item.style.transform = 'scale(1)'; });
         } else {
           item.style.opacity = '0';
@@ -29,8 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   });
-
-  /* ── 2. LIGHTBOX ───────────────────────────────────────── */
   const lightbox  = document.getElementById('galLightbox');
   const lbImg     = document.getElementById('lbImg');
   const lbCaption = document.getElementById('lbCaption');
@@ -39,14 +28,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const lbNext    = document.getElementById('lbNext');
 
   let lbIndex = 0;
-  let lbList  = [];   // live list so newly uploaded images are included
-
+  let lbList  = [];  
   function getLbList() {
     return Array.from(document.querySelectorAll('.gal-item[style*="display: none"]')).length > 0
       ? Array.from(document.querySelectorAll('.gal-item')).filter(i => i.style.display !== 'none')
       : Array.from(document.querySelectorAll('.gal-item'));
   }
-
   function openLb(index) {
     lbList  = getLbList();
     lbIndex = index;
@@ -57,17 +44,14 @@ document.addEventListener('DOMContentLoaded', () => {
     lightbox.classList.add('lb-open');
     document.body.style.overflow = 'hidden';
   }
-
   function closeLb() {
     lightbox.classList.remove('lb-open');
     document.body.style.overflow = '';
   }
-
   // Attach click to existing items
   galItems.forEach((item, i) => {
     item.addEventListener('click', () => openLb(i));
   });
-
   // Oscar strip thumbnails also open lightbox
   document.querySelectorAll('.oscar-strip-thumb').forEach(thumb => {
     thumb.addEventListener('click', () => {
@@ -77,10 +61,8 @@ document.addEventListener('DOMContentLoaded', () => {
       document.body.style.overflow = 'hidden';
     });
   });
-
   lbClose.addEventListener('click', closeLb);
   lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLb(); });
-
   lbNext.addEventListener('click', () => {
     lbList  = getLbList();
     lbIndex = (lbIndex + 1) % lbList.length;
@@ -88,7 +70,6 @@ document.addEventListener('DOMContentLoaded', () => {
     lbImg.src = img.src;
     lbCaption.textContent = lbList[lbIndex].querySelector('.gal-overlay span')?.textContent || '';
   });
-
   lbPrev.addEventListener('click', () => {
     lbList  = getLbList();
     lbIndex = (lbIndex - 1 + lbList.length) % lbList.length;
@@ -96,7 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
     lbImg.src = img.src;
     lbCaption.textContent = lbList[lbIndex].querySelector('.gal-overlay span')?.textContent || '';
   });
-
   // Keyboard navigation
   document.addEventListener('keydown', e => {
     if (!lightbox.classList.contains('lb-open')) return;
@@ -104,8 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'ArrowRight')   lbNext.click();
     if (e.key === 'ArrowLeft')    lbPrev.click();
   });
-
-  /* ── 3. UPLOAD — drag-drop + file input ─────────────────── */
+  /*  UPLOAD */
   const dropZone        = document.getElementById('dropZone');
   const fileInput       = document.getElementById('fileInput');
   const previewWrap     = document.getElementById('uploadPreviewWrap');
@@ -115,7 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const galGrid         = document.getElementById('galGrid');
 
   let selectedFile = null;
-
   function showPreview(file) {
     if (!file || !file.type.startsWith('image/')) {
       alert('Please select a valid image file (JPG, PNG, WEBP, etc.)');
@@ -130,12 +108,10 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     reader.readAsDataURL(file);
   }
-
   // File input change
   fileInput.addEventListener('change', () => {
     if (fileInput.files[0]) showPreview(fileInput.files[0]);
   });
-
   // Drag over styling
   dropZone.addEventListener('dragover', e => {
     e.preventDefault();
@@ -147,7 +123,6 @@ document.addEventListener('DOMContentLoaded', () => {
     dropZone.classList.remove('drag-over');
     if (e.dataTransfer.files[0]) showPreview(e.dataTransfer.files[0]);
   });
-
   // Remove preview
   removeBtn.addEventListener('click', () => {
     selectedFile = null;
@@ -156,18 +131,15 @@ document.addEventListener('DOMContentLoaded', () => {
     previewWrap.style.display = 'none';
     dropZone.style.display    = 'flex';
   });
-
   // Submit — add to gallery instantly
   submitBtn.addEventListener('click', () => {
     if (!selectedFile) {
       alert('Please choose a photo first! 🐾');
       return;
     }
-
     const name    = document.getElementById('uploaderName').value.trim() || 'A Happy Guest';
     const pet     = document.getElementById('petName').value.trim()      || 'Furry Friend';
     const caption = document.getElementById('uploadCaption').value.trim() || `${name} & ${pet}`;
-
     const reader = new FileReader();
     reader.onload = e => {
       // Build new gallery card
@@ -179,19 +151,15 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="gal-overlay"><span>${caption}</span></div>
         <div class="gal-uploaded-badge">📤 New!</div>
       `;
-
       // Insert at beginning of grid
       galGrid.insertBefore(newItem, galGrid.firstChild);
-
-      // Attach lightbox click
+      // Attaches lightbox click
       const allItems = document.querySelectorAll('.gal-item');
       newItem.addEventListener('click', () => {
         lbList  = Array.from(allItems);
         lbIndex = 0;
         openLb(0);
       });
-
-      // Animate in
       requestAnimationFrame(() => {
         newItem.style.opacity   = '0';
         newItem.style.transform = 'scale(0.85)';
@@ -201,10 +169,8 @@ document.addEventListener('DOMContentLoaded', () => {
           newItem.style.transform  = 'scale(1)';
         });
       });
-
       // Show success toast
       showToast(`🐾 Photo added! Thanks, ${name}!`);
-
       // Reset form
       selectedFile = null;
       fileInput.value = '';
@@ -214,14 +180,11 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('uploaderName').value  = '';
       document.getElementById('petName').value       = '';
       document.getElementById('uploadCaption').value = '';
-
       // Scroll to gallery
       document.querySelector('.guest-gallery-section').scrollIntoView({ behavior: 'smooth' });
     };
     reader.readAsDataURL(selectedFile);
   });
-
-  /* ── 4. TOAST NOTIFICATION ─────────────────────────────── */
   function showToast(msg) {
     const toast = document.createElement('div');
     toast.className = 'gal-toast';
@@ -233,5 +196,4 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => toast.remove(), 400);
     }, 3000);
   }
-
 });
